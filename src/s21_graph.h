@@ -7,6 +7,8 @@
 namespace s21 {
 class Graph {
  public:
+  using Matrix = std::vector<int>;
+
   // Constructors and the Destructor
   Graph() = default;
   Graph(const Graph&) = delete;
@@ -19,8 +21,10 @@ class Graph {
   void LoadGraphFromFile(const std::string& filename);
   void ExportGraphToDot(const std::string& filename);
 
+  const Matrix& GetGraph() const;
+  int GetSize() const;
+
  private:
-  using Matrix = std::vector<int>;
   // Variables
   Matrix graph_;
   int size_;

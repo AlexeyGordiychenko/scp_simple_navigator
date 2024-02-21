@@ -65,3 +65,6 @@ void s21::Graph::ClearGraph() {
   graph_.clear();
   size_ = 0;
 }
+
+const s21::Graph::Matrix& s21::Graph::GetGraph() const { return graph_; }
+int s21::Graph::GetSize() const { return size_; }
