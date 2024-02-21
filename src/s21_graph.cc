@@ -32,7 +32,7 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
       continue;
     }
     std::istringstream iss(line);
-    unsigned int value;
+    uint32_t value;
     for (auto i = 0; i < size; ++i) {
       if (iss >> value) {
         graph_.push_back(value);

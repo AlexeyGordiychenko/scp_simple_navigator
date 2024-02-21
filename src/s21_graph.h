@@ -7,7 +7,7 @@
 namespace s21 {
 class Graph {
  public:
-  using Matrix = std::vector<int>;
+  using Matrix = std::vector<uint32_t>;
 
   // Constructors and the Destructor
   Graph() = default;
@@ -27,7 +27,7 @@ class Graph {
  private:
   // Variables
   Matrix graph_;
-  int size_;
+  uint32_t size_;
 
   // Methods
   void ClearGraph();
