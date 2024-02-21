@@ -21,8 +21,12 @@ class Graph {
 
  private:
   using Matrix = std::vector<int>;
+  // Variables
   Matrix graph_;
   int size_;
+
+  // Methods
+  void ClearGraph();
 };
 }  // namespace s21
 #endif  // S21_A2_GRAPH_H_
