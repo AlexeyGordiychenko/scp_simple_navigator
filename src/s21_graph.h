@@ -2,6 +2,7 @@
 #define S21_A2_GRAPH_H_
 
 #include <string>
+#include <vector>
 
 namespace s21 {
 class Graph {
@@ -17,6 +18,11 @@ class Graph {
   // Methods
   void LoadGraphFromFile(const std::string& filename);
   void ExportGraphToDot(const std::string& filename);
+
+ private:
+  using Matrix = std::vector<int>;
+  Matrix graph_;
+  int size_;
 };
 }  // namespace s21
 #endif  // S21_A2_GRAPH_H_
