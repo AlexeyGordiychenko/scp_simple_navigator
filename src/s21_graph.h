@@ -23,11 +23,13 @@ class Graph {
 
   const Matrix& GetGraph() const;
   int GetSize() const;
+  bool IsDirected() const;
 
  private:
   // Variables
   Matrix graph_;
   uint32_t size_;
+  bool directed_;
 
   // Methods
   void ClearGraph();

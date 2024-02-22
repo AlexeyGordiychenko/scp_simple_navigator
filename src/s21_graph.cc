@@ -42,6 +42,10 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
         throw std::runtime_error("Failed to read a value on matrix row " +
                                  std::to_string(rowscount + 1) + ".");
       }
+      if (!directed_ && i < rowscount &&
+          value != graph_[i * size + rowscount]) {
+        directed_ = true;
+      }
     }
     if (iss >> temp) {
       throw std::runtime_error("Too much data for matrix columns.");
@@ -64,7 +68,9 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
 void s21::Graph::ClearGraph() {
   graph_.clear();
   size_ = 0;
+  directed_ = false;
 }
 
 const s21::Graph::Matrix& s21::Graph::GetGraph() const { return graph_; }
 int s21::Graph::GetSize() const { return size_; }
+bool s21::Graph::IsDirected() const { return directed_; }
