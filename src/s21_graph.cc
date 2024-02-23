@@ -65,6 +65,31 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
   size_ = size;
 }
 
+void s21::Graph::ExportGraphToDot(const std::string& filename) {
+  std::ofstream file(filename);
+
+  if (!file.is_open()) {
+    throw std::runtime_error("Can't open the file for saving.");
+  }
+
+  file << (directed_ ? "digraph" : "graph") << " G {\n";
+  auto sep = (directed_ ? " -> " : " -- ");
+  u_int32_t i = 1, j = 1;
+  for (auto value : graph_) {
+    if (j == 1) file << '\t' << i;
+    if (value > 0 && (directed_ || (!directed_ && i <= j))) file << sep << j;
+    if (j >= size_) {
+      ++i;
+      j = 1;
+      file << ";\n";
+    } else {
+      ++j;
+    }
+  }
+  file << "}";
+  file.close();
+}
+
 void s21::Graph::ClearGraph() {
   graph_.clear();
   size_ = 0;
