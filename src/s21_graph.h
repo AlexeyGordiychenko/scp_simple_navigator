@@ -22,7 +22,7 @@ class Graph {
   void ExportGraphToDot(const std::string& filename);
 
   const Matrix& GetGraph() const;
-  int GetSize() const;
+  uint32_t GetSize() const;
   bool IsDirected() const;
 
  private:
