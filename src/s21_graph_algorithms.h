@@ -1,6 +1,8 @@
 #ifndef S21_A2_GRAPH_ALGORITHMS_H_
 #define S21_A2_GRAPH_ALGORITHMS_H_
 
+#include <vector>
+
 #include "containers/s21_queue.h"
 #include "containers/s21_stack.h"
 
@@ -23,8 +25,8 @@ class GraphAlgorithms {
   ~GraphAlgorithms() = default;
 
   // Methods
-  stack<int> DepthFirstSearch(Graph& graph, int start_vertex);
-  queue<int> BreadthFirstSearch(Graph& graph, int start_vertex);
+  std::vector<uint32_t> DepthFirstSearch(Graph& graph, uint32_t start_vertex);
+  std::vector<uint32_t> BreadthFirstSearch(Graph& graph, uint32_t start_vertex);
   int GetShortestPathBetweenVertices(Graph& graph, int vertex1, int vertex2);
   void GetShortestPathsBetweenAllVertices(Graph& graph);  // TODO: return value
   void GetLeastSpanningTree(Graph& graph);                // TODO: return value
