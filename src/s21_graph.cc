@@ -17,7 +17,7 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
   int size = 0;
   if (std::getline(file, line)) {
     std::istringstream iss(line);
-    if (!(iss >> size)) {
+    if (!(iss >> size) || size < 0) {
       throw std::runtime_error("Failed to read the size of a graph.");
     } else if (iss >> temp) {
       throw std::runtime_error("Too many values for the size of a graph.");
@@ -32,11 +32,11 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
       continue;
     }
     std::istringstream iss(line);
-    uint32_t value;
+    int64_t value;
     for (auto i = 0; i < size; ++i) {
-      if (iss >> value) {
+      if (iss >> value && value >= 0) {
         graph_.push_back(value);
-      } else if (iss.eof()) {
+      } else if (iss.eof() && value >= 0) {
         throw std::runtime_error("Not enough data for graph columns.");
       } else {
         throw std::runtime_error("Failed to read a value on matrix row " +
