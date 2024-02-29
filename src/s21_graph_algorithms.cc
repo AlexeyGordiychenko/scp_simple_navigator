@@ -13,19 +13,19 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
   std::vector<uint32_t> traversal;
 
   stack.push(start_vertex - 1);
-  visited[start_vertex - 1] = true;
 
   while (!stack.empty()) {
     uint32_t vertex = stack.top();
     stack.pop();
 
+    if (visited[vertex]) continue;
     traversal.push_back(vertex + 1);
+    visited[vertex] = true;
 
     auto matrix = graph.GetGraph();
     for (uint32_t i = size - 1; i != UINT32_MAX; --i) {
       if (matrix[vertex * size + i] > 0 && !visited[i]) {
         stack.push(i);
-        visited[i] = true;
       }
     }
   }
@@ -44,19 +44,19 @@ std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
   std::vector<uint32_t> traversal;
 
   queue.push(start_vertex - 1);
-  visited[start_vertex - 1] = true;
 
   while (!queue.empty()) {
     uint32_t vertex = queue.front();
     queue.pop();
 
+    if (visited[vertex]) continue;
     traversal.push_back(vertex + 1);
+    visited[vertex] = true;
 
     auto matrix = graph.GetGraph();
     for (uint32_t i = 0; i < size; ++i) {
       if (matrix[vertex * size + i] > 0 && !visited[i]) {
         queue.push(i);
-        visited[i] = true;
       }
     }
   }
