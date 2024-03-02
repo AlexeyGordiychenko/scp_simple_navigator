@@ -29,7 +29,7 @@ class GraphAlgorithms {
   std::vector<uint32_t> BreadthFirstSearch(Graph& graph, uint32_t start_vertex);
   int GetShortestPathBetweenVertices(Graph& graph, int vertex1, int vertex2);
   void GetShortestPathsBetweenAllVertices(Graph& graph);  // TODO: return value
-  void GetLeastSpanningTree(Graph& graph);                // TODO: return value
+  std::vector<uint32_t> GetLeastSpanningTree(Graph& graph);
   TsmResult& SolveTravelingSalesmanProblem(Graph& graph);
 };
 }  // namespace s21

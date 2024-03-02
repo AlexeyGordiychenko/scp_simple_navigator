@@ -1,5 +1,7 @@
 #include "s21_graph_algorithms.h"
 
+#include <limits>
+
 #include "s21_graph.h"
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
@@ -62,4 +64,65 @@ std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
   }
 
   return traversal;
+}
+
+std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
+    s21::Graph &graph) {
+  if (graph.IsDirected()) {
+    throw std::runtime_error(
+        "It's not possible to find a least spanning tree in a directed graph "
+        "with Prim's algorithm.");
+  }
+  auto size = graph.GetSize();
+  auto matrix = graph.GetGraph();
+
+  std::vector<uint32_t> mst(size * size, 0);
+
+  if (size == 0) return mst;
+  if (size == 1) {
+    mst[0] = matrix[0];
+    return mst;
+  }
+
+  std::vector<bool> visited(size, false);
+  // The first vertex is a starting point
+  visited[0] = true;
+
+  // Keep track of the order of connecting vertices
+  std::vector<uint32_t> vertices_order = {0};
+
+  // Repeat until all the vertices are visited
+  while (true) {
+    // Find the minimum weight edge that connects a visited vertex to an
+    // unvisited vertex
+    uint32_t min_weight = std::numeric_limits<uint32_t>::max();
+    uint32_t min_i = 0;
+    uint32_t min_j = 0;
+
+    for (auto i : vertices_order) {
+      for (uint32_t j = 0; j < size; ++j) {
+        if (!visited[j] && matrix[i * size + j] > 0 &&
+            matrix[i * size + j] < min_weight) {
+          min_weight = matrix[i * size + j];
+          min_i = i;
+          min_j = j;
+        }
+      }
+    }
+
+    // If no such edge exists, then the MST is complete
+    if (min_weight == std::numeric_limits<uint32_t>::max()) {
+      break;
+    }
+
+    // Add the edge to the MST matrix
+    mst[min_i * size + min_j] = min_weight;
+    mst[min_j * size + min_i] = min_weight;
+
+    // Mark the vertex as visited and add it to the order
+    visited[min_j] = true;
+    vertices_order.push_back(min_j);
+  }
+
+  return mst;
 }
