@@ -18,7 +18,7 @@ TEST(DepthFirstSearchTestCase, 1) {
 
 TEST(DepthFirstSearchTestCase, 2) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_directed3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{1,  2, 6,  5,  4,  3,  11, 9,
                                10, 8, 14, 15, 13, 12, 7};
@@ -27,7 +27,7 @@ TEST(DepthFirstSearchTestCase, 2) {
 
 TEST(DepthFirstSearchTestCase, 3) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_directed3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{18, 17, 16, 2,  1,  5, 4,  3,  11,
                                9,  10, 8,  14, 15, 6, 13, 12, 7};
@@ -36,7 +36,7 @@ TEST(DepthFirstSearchTestCase, 3) {
 
 TEST(DepthFirstSearchTestCase, 4) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{10, 8, 1,  2,  6,  5,  4, 3,
                                11, 9, 14, 15, 13, 12, 7};
@@ -45,7 +45,7 @@ TEST(DepthFirstSearchTestCase, 4) {
 
 TEST(DepthFirstSearchTestCase, 5) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{4, 3, 11, 9,  10, 8,  1, 2,
                                6, 5, 14, 15, 7,  12, 13};
@@ -54,7 +54,7 @@ TEST(DepthFirstSearchTestCase, 5) {
 
 TEST(DepthFirstSearchTestCase, 6) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{4, 3, 11, 9,  10, 8,  1, 2,
                                6, 5, 14, 15, 7,  12, 13};
@@ -79,7 +79,7 @@ TEST(BreadthFirstSearchTestCase, 1) {
 
 TEST(BreadthFirstSearchTestCase, 2) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_directed3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{1,  2,  5,  7,  8,  6, 13, 4,
                                14, 12, 10, 15, 11, 3, 9};
@@ -88,7 +88,7 @@ TEST(BreadthFirstSearchTestCase, 2) {
 
 TEST(BreadthFirstSearchTestCase, 3) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_directed3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{17, 16, 2,  6,  1,  7, 13, 5, 15,
                                8,  4,  12, 11, 14, 9, 10, 3};
@@ -97,7 +97,7 @@ TEST(BreadthFirstSearchTestCase, 3) {
 
 TEST(BreadthFirstSearchTestCase, 4) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{1,  2,  5,  7,  8,  6, 13, 4,
                                14, 12, 10, 15, 11, 3, 9};
@@ -106,7 +106,7 @@ TEST(BreadthFirstSearchTestCase, 4) {
 
 TEST(BreadthFirstSearchTestCase, 5) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{7,  1, 2, 4,  12, 5,  8, 6,
                                13, 3, 9, 14, 10, 15, 11};
@@ -115,7 +115,7 @@ TEST(BreadthFirstSearchTestCase, 5) {
 
 TEST(BreadthFirstSearchTestCase, 6) {
   s21::Graph graph;
-  graph.LoadGraphFromFile("tests/files/graph_undirected3.txt");
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
   s21::GraphAlgorithms algorithms;
   std::vector<uint32_t> result{4, 3, 11, 9,  10, 8,  1, 2,
                                6, 5, 14, 15, 7,  12, 13};
