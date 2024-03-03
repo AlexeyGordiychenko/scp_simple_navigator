@@ -121,3 +121,80 @@ TEST(BreadthFirstSearchTestCase, 6) {
                                6, 5, 14, 15, 7,  12, 13};
   EXPECT_THROW(algorithms.BreadthFirstSearch(graph, 21), std::out_of_range);
 }
+
+TEST(LeastSpanningTree, 0) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/spanning_tree_1.txt");
+  s21::GraphAlgorithms algorithms;
+  std::vector<uint32_t> result{0, 4, 0, 0, 2, 0, 0, 0, 4, 0, 0, 5, 0, 0, 3, 0,
+                               0, 0, 0, 0, 0, 4, 1, 0, 0, 5, 0, 0, 0, 0, 0, 0,
+                               2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 4,
+                               0, 3, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0};
+  EXPECT_EQ(algorithms.GetLeastSpanningTree(graph), result);
+}
+
+TEST(LeastSpanningTree, 1) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/spanning_tree_2.txt");
+  s21::GraphAlgorithms algorithms;
+  std::vector<uint32_t> result{
+      0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 3, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+      0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 2, 0, 0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0,
+      0, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      2, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0,
+  };
+  EXPECT_EQ(algorithms.GetLeastSpanningTree(graph), result);
+}
+
+TEST(LeastSpanningTree, 2) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/spanning_tree_3.txt");
+  s21::GraphAlgorithms algorithms;
+  std::vector<uint32_t> result{
+      0, 1, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+      0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0,
+      0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 4, 2,
+      0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 5, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3,
+      0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 6, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 5, 0};
+  EXPECT_EQ(algorithms.GetLeastSpanningTree(graph), result);
+}
+
+TEST(LeastSpanningTree, 3) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_directed_2.txt");
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THAT([&]() { algorithms.GetLeastSpanningTree(graph); },
+              testing::ThrowsMessage<std::runtime_error>(
+                  testing::HasSubstr("It's not possible to find")));
+}
+
+TEST(LeastSpanningTree, 4) {
+  s21::Graph graph;
+  s21::GraphAlgorithms algorithms;
+  EXPECT_TRUE(algorithms.GetLeastSpanningTree(graph).empty());
+}
+
+TEST(LeastSpanningTree, 5) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/spanning_tree_4.txt");
+  s21::GraphAlgorithms algorithms;
+  std::vector<uint32_t> result = {0};
+  EXPECT_EQ(algorithms.GetLeastSpanningTree(graph), result);
+}
