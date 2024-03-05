@@ -1,5 +1,6 @@
 #ifndef S21_A2_MENU_H_
 #define S21_A2_MENU_H_
+
 #include <functional>
 #include <iostream>
 #include <string>
@@ -22,6 +23,10 @@ class ConsoleMenu {
   ~ConsoleMenu() = default;
 
   void operator()() const;
+  void FunctionWithTwoUints(std::function<void(uint32_t, uint32_t)>);
+  void FunctionWithString(std::function<void(std::string&)> func);
+
+  void PrintVector(const std::vector<uint32_t>& v);
 
  private:
   std::string invalid_choice_message_;

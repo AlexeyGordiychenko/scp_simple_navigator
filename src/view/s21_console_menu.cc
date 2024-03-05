@@ -35,3 +35,34 @@ void s21::ConsoleMenu::operator()() const {
   }
   commands_[userChoice - 1].second();  // Execute the selected function
 }
+
+void s21::ConsoleMenu::FunctionWithTwoUints(
+    std::function<void(u_int32_t, u_int32_t)> func) {
+  uint32_t a, b;
+  auto prompt = "Enter two positive numbers: ";
+  while (!(out << prompt) || !(in >> a) || !(in >> b) || in.peek() != '\n') {
+    in.clear();
+    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    out << '\n' << invalid_choice_message_;
+  }
+  func(a, b);
+}
+
+void s21::ConsoleMenu::FunctionWithString(
+    std::function<void(std::string&)> func) {
+  std::string s;
+  in.clear();
+  in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  auto prompt = "Enter a string: ";
+  while (!(out << prompt) || !(std::getline(in, s))) {
+    out << '\n' << invalid_choice_message_;
+  }
+  func(s);
+}
+
+void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
+  for (auto i : v) {
+    out << i << " ";
+  }
+  out << std::endl;
+}
