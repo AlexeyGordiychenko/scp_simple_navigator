@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "containers/s21_queue.h"
-#include "containers/s21_stack.h"
+#include "../containers/s21_queue.h"
+#include "../containers/s21_stack.h"
 
 namespace s21 {
 class Graph;

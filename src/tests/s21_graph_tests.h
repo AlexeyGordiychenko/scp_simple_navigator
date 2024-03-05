@@ -3,7 +3,7 @@
 
 #include <fstream>
 
-#include "../s21_graph.h"
+#include "../lib/s21_graph.h"
 #include "s21_navigator_tests.h"
 
 class LoadGraphErrorsTestCase : public ::testing::Test {
