@@ -28,8 +28,8 @@ class Graph {
  private:
   // Variables
   Matrix graph_;
-  uint32_t size_;
-  bool directed_;
+  uint32_t size_ = 0;
+  bool directed_ = false;
 
   // Methods
   void ClearGraph();
