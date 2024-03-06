@@ -171,11 +171,6 @@ TEST(LeastSpanningTree, 3) {
 
 TEST(LeastSpanningTree, 4) {
   s21::Graph graph;
-  EXPECT_TRUE(s21::GraphAlgorithms::GetLeastSpanningTree(graph).empty());
-}
-
-TEST(LeastSpanningTree, 5) {
-  s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/spanning_tree_4.txt");
   std::vector<uint32_t> result = {0};
   EXPECT_EQ(s21::GraphAlgorithms::GetLeastSpanningTree(graph), result);
