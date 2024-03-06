@@ -37,9 +37,8 @@ void s21::ConsoleMenu::operator()() const {
 }
 
 void s21::ConsoleMenu::FunctionWithTwoUints(
-    std::function<void(u_int32_t, u_int32_t)> func) {
+    std::function<void(u_int32_t, u_int32_t)> func, const std::string& prompt) {
   uint32_t a, b;
-  auto prompt = "Enter two positive numbers: ";
   while (!(out << prompt) || !(in >> a) || !(in >> b) || in.peek() != '\n') {
     in.clear();
     in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -49,11 +48,10 @@ void s21::ConsoleMenu::FunctionWithTwoUints(
 }
 
 void s21::ConsoleMenu::FunctionWithString(
-    std::function<void(std::string&)> func) {
+    std::function<void(std::string&)> func, const std::string& prompt) {
   std::string s;
   in.clear();
   in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  auto prompt = "Enter a string: ";
   while (!(out << prompt) || !(std::getline(in, s))) {
     out << '\n' << invalid_choice_message_;
   }

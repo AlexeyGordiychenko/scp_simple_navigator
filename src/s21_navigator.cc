@@ -8,9 +8,11 @@ int main() {
       "Choose an option:\n", "Invalid input; ", "> ",
       {{"Load graph from a file",
         [&menu, &controller] {
-          menu.FunctionWithString([&controller](std::string& filename) {
-            controller.LoadGraphFromFile(filename);
-          });
+          menu.FunctionWithString(
+              [&controller](std::string& filename) {
+                controller.LoadGraphFromFile(filename);
+              },
+              "Enter the file path: ");
         }},
        {"Bread first traversal",
         [&menu, &controller] {
@@ -22,9 +24,11 @@ int main() {
         }},
        //  {"The shortest path between any two vertices",
        //   [&menu, &controller] {
-       //     menu.FunctionWithTwoUints([&controller](uint32_t a, uint32_t b) {
-       //       controller.GetShortestPathBetweenVertices(a, b);
-       //     });
+       //     menu.FunctionWithTwoUints(
+       //         [&controller](uint32_t a, uint32_t b) {
+       //           controller.GetShortestPathBetweenVertices(a, b);
+       //         },
+       //         "Enter two vertices: ");
        //   }},
        //  {"The shortest paths between all pairs of vertices",
        //   [&controller] { controller.GetShortestPathsBetweenAllVertices(); }},
