@@ -7,7 +7,7 @@
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
   auto size = graph.GetSize();
-  if (start_vertex > size) {
+  if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
   std::vector<bool> visited(size, false);
@@ -38,7 +38,7 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
 std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
   auto size = graph.GetSize();
-  if (start_vertex > size) {
+  if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
   std::vector<bool> visited(size, false);

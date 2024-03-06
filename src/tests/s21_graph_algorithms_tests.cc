@@ -49,9 +49,21 @@ TEST(DepthFirstSearchTestCase, 5) {
 TEST(DepthFirstSearchTestCase, 6) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
-  std::vector<uint32_t> result{4, 3, 11, 9,  10, 8,  1, 2,
-                               6, 5, 14, 15, 7,  12, 13};
   EXPECT_THROW(s21::GraphAlgorithms::DepthFirstSearch(graph, 20),
+               std::out_of_range);
+}
+
+TEST(DepthFirstSearchTestCase, 7) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
+  EXPECT_THROW(s21::GraphAlgorithms::DepthFirstSearch(graph, 0),
+               std::out_of_range);
+}
+
+TEST(DepthFirstSearchTestCase, 8) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
+  EXPECT_THROW(s21::GraphAlgorithms::DepthFirstSearch(graph, -1),
                std::out_of_range);
 }
 
@@ -104,9 +116,21 @@ TEST(BreadthFirstSearchTestCase, 5) {
 TEST(BreadthFirstSearchTestCase, 6) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
-  std::vector<uint32_t> result{4, 3, 11, 9,  10, 8,  1, 2,
-                               6, 5, 14, 15, 7,  12, 13};
   EXPECT_THROW(s21::GraphAlgorithms::BreadthFirstSearch(graph, 21),
+               std::out_of_range);
+}
+
+TEST(BreadthFirstSearchTestCase, 7) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
+  EXPECT_THROW(s21::GraphAlgorithms::BreadthFirstSearch(graph, 0),
+               std::out_of_range);
+}
+
+TEST(BreadthFirstSearchTestCase, 8) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_undirected_3.txt");
+  EXPECT_THROW(s21::GraphAlgorithms::BreadthFirstSearch(graph, -1),
                std::out_of_range);
 }
 
