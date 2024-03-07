@@ -31,6 +31,7 @@ class ConsoleMenu {
                           const std::string& prompt);
 
   void PrintVector(const std::vector<uint32_t>& v);
+  void PrintMatrix(const std::pair<std::vector<uint32_t>, uint32_t>& data);
 
  private:
   std::string invalid_choice_message_;

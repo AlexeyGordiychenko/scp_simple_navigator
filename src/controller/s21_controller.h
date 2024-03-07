@@ -20,7 +20,7 @@ class Controller {
   std::vector<uint32_t> BreadthFirstSearch(uint32_t start_vertex);
   int GetShortestPathBetweenVertices(int vertex1, int vertex2);
   void GetShortestPathsBetweenAllVertices();  // TODO: return value
-  std::vector<uint32_t> GetLeastSpanningTree();
+  std::pair<std::vector<uint32_t>, uint32_t> GetLeastSpanningTree();
   TsmResult& SolveTravelingSalesmanProblem();
 
  private:

@@ -41,7 +41,9 @@ int main() {
        //  {"The shortest paths between all pairs of vertices",
        //   [&controller] { controller.GetShortestPathsBetweenAllVertices(); }},
        {"Minimal spanning tree",
-        [&controller] { controller.GetLeastSpanningTree(); }},
+        [&menu, &controller] {
+          menu.PrintMatrix(controller.GetLeastSpanningTree());
+        }},
        //  {"The salesman problem",
        //   [&controller] { controller.SolveTravelingSalesmanProblem(); }},
        {"Exit", [&running] { running = false; }}});

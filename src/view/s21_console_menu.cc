@@ -75,3 +75,13 @@ void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
   }
   out << std::endl;
 }
+
+void s21::ConsoleMenu::PrintMatrix(
+    const std::pair<std::vector<uint32_t>, uint32_t>& data) {
+  for (uint32_t i = 0; i < data.second; ++i) {
+    for (uint32_t j = 0; j < data.second; ++j) {
+      out << data.first[i * data.second + j] << " ";
+    }
+    out << std::endl;
+  }
+}

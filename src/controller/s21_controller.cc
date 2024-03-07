@@ -13,6 +13,8 @@ std::vector<uint32_t> s21::Controller::BreadthFirstSearch(
   return s21::GraphAlgorithms::BreadthFirstSearch(graph_, start_vertex);
 }
 
-std::vector<uint32_t> s21::Controller::GetLeastSpanningTree() {
-  return s21::GraphAlgorithms::GetLeastSpanningTree(graph_);
+std::pair<std::vector<uint32_t>, uint32_t>
+s21::Controller::GetLeastSpanningTree() {
+  return std::pair<std::vector<uint32_t>, uint32_t>(
+      s21::GraphAlgorithms::GetLeastSpanningTree(graph_), graph_.GetSize());
 }
