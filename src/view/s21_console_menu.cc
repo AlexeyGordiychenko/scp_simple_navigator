@@ -36,6 +36,17 @@ void s21::ConsoleMenu::operator()() const {
   commands_[userChoice - 1].second();  // Execute the selected function
 }
 
+void s21::ConsoleMenu::FunctionWithOneUint(std::function<void(u_int32_t)> func,
+                                           const std::string& prompt) {
+  uint32_t a;
+  while (!(out << prompt) || !(in >> a) || in.peek() != '\n') {
+    in.clear();
+    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    out << '\n' << invalid_choice_message_;
+  }
+  func(a);
+}
+
 void s21::ConsoleMenu::FunctionWithTwoUints(
     std::function<void(u_int32_t, u_int32_t)> func, const std::string& prompt) {
   uint32_t a, b;

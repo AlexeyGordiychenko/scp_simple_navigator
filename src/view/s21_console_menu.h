@@ -23,6 +23,8 @@ class ConsoleMenu {
   ~ConsoleMenu() = default;
 
   void operator()() const;
+  void FunctionWithOneUint(std::function<void(uint32_t)>,
+                           const std::string& prompt);
   void FunctionWithTwoUints(std::function<void(uint32_t, uint32_t)>,
                             const std::string& prompt);
   void FunctionWithString(std::function<void(std::string&)> func,

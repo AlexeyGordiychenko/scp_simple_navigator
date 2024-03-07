@@ -16,11 +16,19 @@ int main() {
         }},
        {"Bread first traversal",
         [&menu, &controller] {
-          menu.PrintVector(controller.BreadthFirstSearch(1));
+          menu.FunctionWithOneUint(
+              [&menu, &controller](uint32_t a) {
+                menu.PrintVector(controller.BreadthFirstSearch(a));
+              },
+              "Enter the start vertex: ");
         }},
        {"Depth first traversal",
         [&menu, &controller] {
-          menu.PrintVector(controller.DepthFirstSearch(1));
+          menu.FunctionWithOneUint(
+              [&menu, &controller](uint32_t a) {
+                menu.PrintVector(controller.DepthFirstSearch(a));
+              },
+              "Enter the start vertex: ");
         }},
        //  {"The shortest path between any two vertices",
        //   [&menu, &controller] {
