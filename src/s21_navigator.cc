@@ -46,7 +46,11 @@ int main() {
        //   [&controller] { controller.GetShortestPathsBetweenAllVertices(); }},
        {"Minimal spanning tree",
         [&menu, &controller] {
-          menu.PrintMatrix(controller.GetLeastSpanningTree());
+          menu.FunctionWithArgs(
+              static_cast<std::function<void()>>([&menu, &controller]() {
+                menu.PrintMatrix(controller.GetLeastSpanningTree());
+              }),
+              std::make_tuple());
         }},
        //  {"The salesman problem",
        //   [&controller] { controller.SolveTravelingSalesmanProblem(); }},
