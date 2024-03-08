@@ -8,7 +8,7 @@ int main() {
       "Choose an option:\n", "Invalid input\n", "> ",
       {{"Load graph from a file",
         [&menu, &controller] {
-          menu.FunctionWithArgs(static_cast<std::function<void(std::string)>>(
+          menu.CallMenuFunction(static_cast<std::function<void(std::string)>>(
                                     [&controller](std::string filename) {
                                       controller.LoadGraphFromFile(filename);
                                     }),
@@ -16,7 +16,7 @@ int main() {
         }},
        {"Bread first traversal",
         [&menu, &controller] {
-          menu.FunctionWithArgs(
+          menu.CallMenuFunction(
               static_cast<std::function<void(uint32_t)>>(
                   [&menu, &controller](uint32_t a) {
                     menu.PrintVector(controller.BreadthFirstSearch(a));
@@ -25,28 +25,28 @@ int main() {
         }},
        {"Depth first traversal",
         [&menu, &controller] {
-          menu.FunctionWithArgs(
+          menu.CallMenuFunction(
               static_cast<std::function<void(uint32_t)>>(
                   [&menu, &controller](uint32_t a) {
                     menu.PrintVector(controller.DepthFirstSearch(a));
                   }),
               std::make_tuple("Enter the start vertex: "));
         }},
-       //  {"The shortest path between any two vertices",
-       //   [&menu, &controller] {
-       //     menu.FunctionWithArgs(
-       //         static_cast<std::function<void(uint32_t, uint32_t)>>(
-       //             [&controller](uint32_t a, uint32_t b) {
-       //               controller.GetShortestPathBetweenVertices(a, b);
-       //             }),
-       //         std::make_tuple("Enter the first vertex: ",
-       //                         "Enter the second vertex: "));
-       //   }},
-       //  {"The shortest paths between all pairs of vertices",
-       //   [&controller] { controller.GetShortestPathsBetweenAllVertices(); }},
+       // {"The shortest path between any two vertices",
+       //  [&menu, &controller] {
+       //    menu.CallMenuFunction(
+       //        static_cast<std::function<void(uint32_t, uint32_t)>>(
+       //            [&controller](uint32_t a, uint32_t b) {
+       //              controller.GetShortestPathBetweenVertices(a, b);
+       //            }),
+       //        std::make_tuple("Enter the first vertex: ",
+       //                        "Enter the second vertex: "));
+       //  }},
+       // {"The shortest paths between all pairs of vertices",
+       //  [&controller] { controller.GetShortestPathsBetweenAllVertices(); }},
        {"Minimal spanning tree",
         [&menu, &controller] {
-          menu.FunctionWithArgs(
+          menu.CallMenuFunction(
               static_cast<std::function<void()>>([&menu, &controller]() {
                 menu.PrintMatrix(controller.GetLeastSpanningTree());
               }),

@@ -29,7 +29,7 @@ class ConsoleMenu {
   void PrintMatrix(const std::pair<std::vector<uint32_t>, uint32_t>& data);
 
   template <typename... Args, typename... Prompts, std::size_t... I>
-  void FunctionWithArgsImpl(std::function<void(Args...)> func,
+  void CallMenuFunctionImpl(std::function<void(Args...)> func,
                             std::tuple<Prompts...> prompts,
                             std::index_sequence<I...>) {
     std::tuple<Args...> args_tuple;
@@ -49,9 +49,9 @@ class ConsoleMenu {
   }
 
   template <typename... Args, typename... Prompts>
-  void FunctionWithArgs(std::function<void(Args...)> func,
+  void CallMenuFunction(std::function<void(Args...)> func,
                         std::tuple<Prompts...> prompts) {
-    FunctionWithArgsImpl(func, prompts,
+    CallMenuFunctionImpl(func, prompts,
                          std::make_index_sequence<sizeof...(Args)>{});
   }
 
