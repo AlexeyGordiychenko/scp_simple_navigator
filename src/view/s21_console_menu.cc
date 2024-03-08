@@ -36,39 +36,6 @@ void s21::ConsoleMenu::operator()() const {
   commands_[userChoice - 1].second();  // Execute the selected function
 }
 
-void s21::ConsoleMenu::FunctionWithOneUint(std::function<void(u_int32_t)> func,
-                                           const std::string& prompt) {
-  uint32_t a;
-  while (!(out << prompt) || !(in >> a) || in.peek() != '\n') {
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    out << '\n' << invalid_choice_message_;
-  }
-  func(a);
-}
-
-void s21::ConsoleMenu::FunctionWithTwoUints(
-    std::function<void(u_int32_t, u_int32_t)> func, const std::string& prompt) {
-  uint32_t a, b;
-  while (!(out << prompt) || !(in >> a) || !(in >> b) || in.peek() != '\n') {
-    in.clear();
-    in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    out << '\n' << invalid_choice_message_;
-  }
-  func(a, b);
-}
-
-void s21::ConsoleMenu::FunctionWithString(
-    std::function<void(std::string&)> func, const std::string& prompt) {
-  std::string s;
-  in.clear();
-  in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-  while (!(out << prompt) || !(std::getline(in, s))) {
-    out << '\n' << invalid_choice_message_;
-  }
-  func(s);
-}
-
 void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
   for (auto i : v) {
     out << i << " ";
