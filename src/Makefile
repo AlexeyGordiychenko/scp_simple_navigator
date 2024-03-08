@@ -32,7 +32,7 @@ LIBS=$(patsubst $(LIB_DIR)/%.cc,%.a,$(LIBS_SRCS))
 CLANG_FILES=$(shell find $(SRC_DIR) \( -name "s21_*.cc" -o -name "s21_*.h" \) -print)
 
 # Builds
-PROGRAM=s21_Navigator
+PROGRAM=s21_navigator
 TEST=test
 TEST_GCOV=$(TEST)_gcov
 TEST_BUILD=$(TEST)_build
