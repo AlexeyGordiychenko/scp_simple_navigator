@@ -11,8 +11,8 @@ s21::ConsoleMenu::ConsoleMenu(
     std::istream& in, std::ostream& out)
     : invalid_choice_message_{invalid_choice_message},
       commands_{commands},
-      in{in},
-      out{out} {
+      in_{in},
+      out_{out} {
   // Construct the prompt message
   std::stringstream ss;
   ss << message;
@@ -25,30 +25,30 @@ s21::ConsoleMenu::ConsoleMenu(
 
 void s21::ConsoleMenu::operator()() const {
   uint32_t userChoice;
-  out << '\n';
-  while (!(out << prompt_) || !(in >> userChoice) || userChoice <= 0 ||
-         userChoice > commands_.size() || in.peek() != '\n') {
-    in.clear();  // Clear the error state
-    in.ignore(std::numeric_limits<std::streamsize>::max(),
-              '\n');  // Ignore the rest of the line
-    out << '\n' << invalid_choice_message_;
+  out_ << '\n';
+  while (!(out_ << prompt_) || !(in_ >> userChoice) || userChoice <= 0 ||
+         userChoice > commands_.size() || in_.peek() != '\n') {
+    in_.clear();  // Clear the error state
+    in_.ignore(std::numeric_limits<std::streamsize>::max(),
+               '\n');  // Ignore the rest of the line
+    out_ << '\n' << invalid_choice_message_;
   }
   commands_[userChoice - 1].second();  // Execute the selected function
 }
 
 void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
   for (auto i : v) {
-    out << i << " ";
+    out_ << i << " ";
   }
-  out << std::endl;
+  out_ << std::endl;
 }
 
 void s21::ConsoleMenu::PrintMatrix(
     const std::pair<std::vector<uint32_t>, uint32_t>& data) {
   for (uint32_t i = 0; i < data.second; ++i) {
     for (uint32_t j = 0; j < data.second; ++j) {
-      out << data.first[i * data.second + j] << " ";
+      out_ << data.first[i * data.second + j] << " ";
     }
-    out << std::endl;
+    out_ << std::endl;
   }
 }

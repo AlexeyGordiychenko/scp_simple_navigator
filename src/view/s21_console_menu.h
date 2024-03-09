@@ -44,7 +44,7 @@ class ConsoleMenu {
       // Call the function with the validated inputs
       std::apply([&func](auto&&... args) { func(args...); }, args_tuple);
     } catch (const std::exception& e) {
-      out << e.what() << '\n';
+      out_ << e.what() << '\n';
     }
   }
 
@@ -59,24 +59,24 @@ class ConsoleMenu {
   std::string invalid_choice_message_;
   std::string prompt_;
   std::vector<std::pair<std::string_view, std::function<void()>>> commands_;
-  std::istream& in;
-  std::ostream& out;
+  std::istream& in_;
+  std::ostream& out_;
   template <typename T>
   void ValidateInput(T& arg, const std::string& prompt) {
     auto valid_input = false;
-    while (!valid_input && out << prompt) {
+    while (!valid_input && out_ << prompt) {
       if constexpr (std::is_same_v<T, std::string>) {
-        in.clear();
-        in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        valid_input = (std::getline(in, arg)) ? true : false;
+        in_.clear();
+        in_.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        valid_input = (std::getline(in_, arg)) ? true : false;
       } else {
-        valid_input = (in >> arg && in.peek() == '\n');
+        valid_input = (in_ >> arg && in_.peek() == '\n');
       }
 
       if (!valid_input) {
-        in.clear();
-        in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        out << invalid_choice_message_;
+        in_.clear();
+        in_.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        out_ << invalid_choice_message_;
       }
     }
   }
