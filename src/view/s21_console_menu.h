@@ -25,6 +25,7 @@ class ConsoleMenu {
 
   void operator()() const;
 
+  void SetCurrentFile(const std::string& filename);
   void PrintVector(const std::vector<uint32_t>& v);
   void PrintMatrix(const std::pair<std::vector<uint32_t>, uint32_t>& data);
 
@@ -58,6 +59,7 @@ class ConsoleMenu {
  private:
   std::string invalid_choice_message_;
   std::string prompt_;
+  std::string current_file_info_;
   std::vector<std::pair<std::string_view, std::function<void()>>> commands_;
   std::istream& in_;
   std::ostream& out_;

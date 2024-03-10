@@ -9,8 +9,10 @@ int main() {
       {{"Load graph from a file",
         [&menu, &controller] {
           menu.CallMenuFunction(static_cast<std::function<void(std::string)>>(
-                                    [&controller](std::string filename) {
+                                    [&menu, &controller](std::string filename) {
+                                      menu.SetCurrentFile("");
                                       controller.LoadGraphFromFile(filename);
+                                      menu.SetCurrentFile(filename);
                                     }),
                                 std::make_tuple("Enter the file path: "));
         }},

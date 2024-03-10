@@ -26,7 +26,8 @@ s21::ConsoleMenu::ConsoleMenu(
 void s21::ConsoleMenu::operator()() const {
   uint32_t userChoice;
   out_ << '\n';
-  while (!(out_ << prompt_) || !(in_ >> userChoice) || userChoice <= 0 ||
+  while (!(out_ << current_file_info_) || !(out_ << prompt_) ||
+         !(in_ >> userChoice) || userChoice <= 0 ||
          userChoice > commands_.size() || in_.peek() != '\n') {
     in_.clear();  // Clear the error state
     in_.ignore(std::numeric_limits<std::streamsize>::max(),
@@ -34,6 +35,11 @@ void s21::ConsoleMenu::operator()() const {
     out_ << '\n' << invalid_choice_message_;
   }
   commands_[userChoice - 1].second();  // Execute the selected function
+}
+
+void s21::ConsoleMenu::SetCurrentFile(const std::string& filename) {
+  current_file_info_ =
+      filename.empty() ? "" : "Current file: " + filename + '\n';
 }
 
 void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
