@@ -9,17 +9,17 @@ s21::ConsoleMenu::ConsoleMenu(
     const std::vector<std::pair<std::string_view, std::function<void()>>>&
         commands,
     std::istream& in, std::ostream& out)
-    : invalid_choice_message_{invalid_choice_message},
-      commands_{commands},
-      in_{in},
-      out_{out} {
+    : commands_{commands}, in_{in}, out_{out} {
+  // Construct the invalid choice message
+  invalid_choice_message_ = kRed + kBold + invalid_choice_message + kResetColor;
   // Construct the prompt message
   std::stringstream ss;
-  ss << message;
+  ss << kBold << message;
   for (size_t i = 0; i < commands_.size(); ++i) {
-    ss << '[' << (i + 1) << "] " << commands_[i].first << '\n';
+    ss << kYellow << kBold << '[' << (i + 1) << "] " << kResetColor
+       << commands_[i].first << '\n';
   }
-  ss << prompt;
+  ss << kResetColor << prompt;
   prompt_ = ss.str();
 }
 
@@ -38,8 +38,10 @@ void s21::ConsoleMenu::operator()() const {
 }
 
 void s21::ConsoleMenu::SetCurrentFile(const std::string& filename) {
-  current_file_info_ =
-      filename.empty() ? "" : "Current file: " + filename + '\n';
+  current_file_info_ = filename.empty()
+                           ? ""
+                           : kBold + "Current file: " + kGreen + kBold +
+                                 filename + kResetColor + '\n';
 }
 
 void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {

@@ -45,7 +45,7 @@ class ConsoleMenu {
       // Call the function with the validated inputs
       std::apply([&func](auto&&... args) { func(args...); }, args_tuple);
     } catch (const std::exception& e) {
-      out_ << e.what() << '\n';
+      out_ << kRed << kBold << e.what() << kResetColor << '\n';
     }
   }
 
@@ -63,6 +63,14 @@ class ConsoleMenu {
   std::vector<std::pair<std::string_view, std::function<void()>>> commands_;
   std::istream& in_;
   std::ostream& out_;
+
+  // Colors
+  const std::string kRed = "\033[0;31m";
+  const std::string kGreen = "\033[0;32m";
+  const std::string kYellow = "\033[0;33m";
+  const std::string kBold = "\033[1m";
+  const std::string kResetColor = "\033[0m";
+
   template <typename T>
   void ValidateInput(T& arg, const std::string& prompt) {
     auto valid_input = false;
