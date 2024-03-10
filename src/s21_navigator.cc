@@ -21,7 +21,9 @@ int main() {
           menu.CallMenuFunction(
               static_cast<std::function<void(uint32_t)>>(
                   [&menu, &controller](uint32_t a) {
-                    menu.PrintVector(controller.BreadthFirstSearch(a));
+                    menu.PrintVector(controller.BreadthFirstSearch(a),
+                                     "Bread first traversal, starting from " +
+                                         std::to_string(a) + ":\n");
                   }),
               std::make_tuple("Enter the start vertex: "));
         }},
@@ -30,7 +32,9 @@ int main() {
           menu.CallMenuFunction(
               static_cast<std::function<void(uint32_t)>>(
                   [&menu, &controller](uint32_t a) {
-                    menu.PrintVector(controller.DepthFirstSearch(a));
+                    menu.PrintVector(controller.DepthFirstSearch(a),
+                                     "Depth first traversal, starting from " +
+                                         std::to_string(a) + ":\n");
                   }),
               std::make_tuple("Enter the start vertex: "));
         }},
@@ -50,7 +54,8 @@ int main() {
         [&menu, &controller] {
           menu.CallMenuFunction(
               static_cast<std::function<void()>>([&menu, &controller]() {
-                menu.PrintMatrix(controller.GetLeastSpanningTree());
+                menu.PrintMatrix(controller.GetLeastSpanningTree(),
+                                 "Minimal spanning tree:\n");
               }),
               std::make_tuple());
         }},

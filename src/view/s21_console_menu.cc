@@ -44,7 +44,9 @@ void s21::ConsoleMenu::SetCurrentFile(const std::string& filename) {
                                  filename + kResetColor + '\n';
 }
 
-void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
+void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v,
+                                   const std::string& desc) {
+  out_ << kGreen << kBold << desc << kResetColor;
   for (auto i : v) {
     out_ << i << " ";
   }
@@ -52,7 +54,9 @@ void s21::ConsoleMenu::PrintVector(const std::vector<uint32_t>& v) {
 }
 
 void s21::ConsoleMenu::PrintMatrix(
-    const std::pair<std::vector<uint32_t>, uint32_t>& data) {
+    const std::pair<std::vector<uint32_t>, uint32_t>& data,
+    const std::string& desc) {
+  out_ << kGreen << kBold << desc << kResetColor;
   for (uint32_t i = 0; i < data.second; ++i) {
     for (uint32_t j = 0; j < data.second; ++j) {
       out_ << data.first[i * data.second + j] << " ";
