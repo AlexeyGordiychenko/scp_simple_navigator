@@ -10,7 +10,7 @@ namespace s21 {
 class Graph;
 
 struct TsmResult {
-  int* vertices;
+  std::vector<u_int32_t> vertices;
   double distance;
 };
 
