@@ -1,8 +1,12 @@
 #include "s21_tsp_NN.h"
 
 #include <algorithm>
+#include <stdexcept>
 
 s21::TsmResult s21::TSPNearestNeighbor::Solve() {
+  if (!graph_.IsConnected())
+    throw std::runtime_error("Graph is not connected.");
+
   auto matrix = graph_.GetGraph();
   auto size = graph_.GetSize();
 

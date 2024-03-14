@@ -1,9 +1,12 @@
 #include "s21_tsp_annealing.h"
 
 #include <algorithm>
-#include <iostream>
+#include <stdexcept>
 
 s21::TsmResult s21::TSPAnnealing::Solve() {
+  if (!graph_.IsConnected())
+    throw std::runtime_error("Graph is not connected.");
+
   auto result = GenerateRandomResult();
 
   while (temperature_ > 0.00001) {
