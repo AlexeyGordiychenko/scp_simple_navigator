@@ -1,6 +1,7 @@
 #ifndef S21_A2_GRAPH_ALGORITHMS_H_
 #define S21_A2_GRAPH_ALGORITHMS_H_
 
+#include <random>
 #include <vector>
 
 #include "../containers/s21_queue.h"
@@ -23,6 +24,11 @@ class GraphAlgorithms {
       Graph& graph);  // TODO: return value
   static std::vector<uint32_t> GetLeastSpanningTree(Graph& graph);
   static TsmResult& SolveTravelingSalesmanProblem(Graph& graph);
+  static TsmResult SolveTravelingSalesmanProblemAnnealing(
+      const Graph& graph, const double initial_temperature,
+      const double cooling_rate, const unsigned seed = std::random_device{}());
+  static TsmResult SolveTravelingSalesmanProblemNearestNeighbor(
+      const Graph& graph, const unsigned seed = std::random_device{}());
 };
 }  // namespace s21
 #endif  // S21_A2_GRAPH_ALGORITHMS_H_

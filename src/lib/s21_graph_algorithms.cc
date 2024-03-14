@@ -3,6 +3,8 @@
 #include <limits>
 
 #include "s21_graph.h"
+#include "s21_tsp_NN.h"
+#include "s21_tsp_annealing.h"
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
@@ -31,7 +33,6 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
       }
     }
   }
-
   return traversal;
 }
 
@@ -125,4 +126,18 @@ std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
   }
 
   return mst;
+}
+
+s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+    const s21::Graph &graph, const double initial_temperature,
+    const double cooling_rate, const unsigned seed) {
+  TSPAnnealing tsp(graph, initial_temperature, cooling_rate, seed);
+  return tsp.Solve();
+}
+
+s21::TsmResult
+s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
+    const s21::Graph &graph, const unsigned seed) {
+  TSPNearestNeighbor tsp(graph, seed);
+  return tsp.Solve();
 }
