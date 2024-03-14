@@ -61,6 +61,34 @@ int main() {
         }},
        //  {"The salesman problem",
        //   [&controller] { controller.SolveTravelingSalesmanProblem(); }},
+       {"The salesman problem (annealing)",
+        [&menu, &controller] {
+          menu.CallMenuFunction(
+              static_cast<std::function<void()>>([&menu, &controller]() {
+                auto result =
+                    controller.SolveTravelingSalesmanProblemAnnealing();
+                menu.PrintVector(
+                    result.vertices,
+                    "TSM result (annealing) with distance " +
+                        std::to_string(static_cast<uint32_t>(result.distance)) +
+                        ":\n");
+              }),
+              std::make_tuple());
+        }},
+       {"The salesman problem (nearest neighbor)",
+        [&menu, &controller] {
+          menu.CallMenuFunction(
+              static_cast<std::function<void()>>([&menu, &controller]() {
+                auto result =
+                    controller.SolveTravelingSalesmanProblemNearestNeighbor();
+                menu.PrintVector(
+                    result.vertices,
+                    "TSM result (nearest neighbor) with distance " +
+                        std::to_string(static_cast<uint32_t>(result.distance)) +
+                        ":\n");
+              }),
+              std::make_tuple());
+        }},
        {"Exit", [&running] { running = false; }}});
   while (running) {
     menu();

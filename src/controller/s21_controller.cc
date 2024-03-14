@@ -18,3 +18,13 @@ s21::Controller::GetLeastSpanningTree() {
   return std::pair<std::vector<uint32_t>, uint32_t>(
       s21::GraphAlgorithms::GetLeastSpanningTree(graph_), graph_.GetSize());
 }
+
+s21::TsmResult s21::Controller::SolveTravelingSalesmanProblemAnnealing() {
+  return s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+      graph_, 1000, 0.9);
+}
+
+s21::TsmResult s21::Controller::SolveTravelingSalesmanProblemNearestNeighbor() {
+  return s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
+      graph_);
+}

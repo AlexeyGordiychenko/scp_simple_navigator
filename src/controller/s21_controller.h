@@ -3,6 +3,7 @@
 
 #include "../lib/s21_graph.h"
 #include "../lib/s21_graph_algorithms.h"
+#include "../lib/s21_tsm_result.h"
 
 namespace s21 {
 
@@ -22,6 +23,8 @@ class Controller {
   void GetShortestPathsBetweenAllVertices();  // TODO: return value
   std::pair<std::vector<uint32_t>, uint32_t> GetLeastSpanningTree();
   TsmResult& SolveTravelingSalesmanProblem();
+  TsmResult SolveTravelingSalesmanProblemAnnealing();
+  TsmResult SolveTravelingSalesmanProblemNearestNeighbor();
 
  private:
   Graph graph_;
