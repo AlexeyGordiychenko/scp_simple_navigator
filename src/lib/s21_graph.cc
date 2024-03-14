@@ -36,6 +36,7 @@ void s21::Graph::LoadGraphFromFile(const std::string& filename) {
     for (auto i = 0; i < size; ++i) {
       if (iss >> value && value >= 0) {
         graph_.push_back(value);
+        if (value == 0 && i != rowscount) connected_ = false;
       } else if (iss.eof() && value >= 0) {
         throw std::runtime_error("Not enough data for graph columns.");
       } else {
@@ -94,8 +95,10 @@ void s21::Graph::ClearGraph() {
   graph_.clear();
   size_ = 0;
   directed_ = false;
+  connected_ = true;
 }
 
 const s21::Graph::Matrix& s21::Graph::GetGraph() const { return graph_; }
 uint32_t s21::Graph::GetSize() const { return size_; }
 bool s21::Graph::IsDirected() const { return directed_; }
+bool s21::Graph::IsConnected() const { return connected_; }

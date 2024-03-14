@@ -24,12 +24,13 @@ class Graph {
   const Matrix& GetGraph() const;
   uint32_t GetSize() const;
   bool IsDirected() const;
+  bool IsConnected() const;
 
  private:
   // Variables
   Matrix graph_;
   uint32_t size_ = 0;
-  bool directed_ = false;
+  bool directed_ = false, connected_ = true;
 
   // Methods
   void ClearGraph();
