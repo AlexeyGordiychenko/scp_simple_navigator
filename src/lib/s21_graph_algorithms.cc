@@ -129,6 +129,20 @@ std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
   return mst;
 }
 
+s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+    const s21::Graph &graph, const double initial_temperature,
+    const double cooling_rate, const unsigned seed) {
+  TSPAnnealing tsp(graph, initial_temperature, cooling_rate, seed);
+  return tsp.Solve();
+}
+
+s21::TsmResult
+s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
+    const s21::Graph &graph, const unsigned seed) {
+  TSPNearestNeighbor tsp(graph, seed);
+  return tsp.Solve();
+}
+
 int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
                                                          int vertex1,
                                                          int vertex2) {
@@ -213,7 +227,7 @@ s21::TsmResult &s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
   }
 
   int best_distance = INT32_MAX;
-  std::vector<int> best_tour;
+  std::vector<u_int32_t> best_tour;
 
   for (int iter = 0; iter < NUM_ITER; iter++) {
     std::vector<double> deltapheromone(SIZE, 0.0);

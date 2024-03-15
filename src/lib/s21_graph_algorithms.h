@@ -11,11 +11,6 @@
 namespace s21 {
 class Graph;
 
-struct TsmResult {
-  std::vector<int> vertices;
-  double distance;
-};
-
 class GraphAlgorithms {
  public:
   // Methods

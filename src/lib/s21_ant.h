@@ -18,10 +18,10 @@ class Ant {
       std::vector<double>& visibility, std::vector<double>& deltapheromone,
       std::mt19937& gen, double alpha, double beta);
   void constructTour();
-  vector<int> GetTour() { return tour_; }
+  vector<u_int32_t> GetTour() { return tour_; }
 
  private:
-  vector<int> tour_;
+  vector<u_int32_t> tour_;
   Graph& graph_;
   double alpha_;
   double beta_;
