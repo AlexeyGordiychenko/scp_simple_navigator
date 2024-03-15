@@ -8,16 +8,14 @@ TEST(aco_algorithm_test, tsp_graph_1) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/tsp_graph_1.txt");
   s21::GraphAlgorithms algorithms;
-  s21::TsmResult& result = algorithms.SolveTravelingSalesmanProblem(graph);
+  s21::TsmResult result = algorithms.SolveTravelingSalesmanProblem(graph);
   EXPECT_EQ(result.distance, 52);
-  delete &result;
 }
 
 TEST(aco_algorithm_test, tsp_graph_2) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/tsp_graph_2.txt");
   s21::GraphAlgorithms algorithms;
-  s21::TsmResult& result = algorithms.SolveTravelingSalesmanProblem(graph);
+  s21::TsmResult result = algorithms.SolveTravelingSalesmanProblem(graph);
   EXPECT_EQ(result.distance, 253);
-  delete &result;
 }

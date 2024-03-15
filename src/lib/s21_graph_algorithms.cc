@@ -206,7 +206,7 @@ s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
   return dist;
 }
 
-s21::TsmResult &s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
+s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
     Graph &graph) {
   const int NUM_ANTS = 1500;
   const int NUM_ITER = 30;
@@ -249,8 +249,5 @@ s21::TsmResult &s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
       pheromone[i] = (1.0 - Q) * pheromone[i] + deltapheromone[i];
   }
 
-  TsmResult *result = new TsmResult;
-  result->distance = best_distance;
-  result->vertices = best_tour;
-  return *result;
+  return {best_tour, static_cast<double>(best_distance)};
 }

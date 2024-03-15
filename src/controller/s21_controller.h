@@ -23,7 +23,7 @@ class Controller {
   std::pair<std::vector<uint32_t>, uint32_t>
   GetShortestPathsBetweenAllVertices();
   std::pair<std::vector<uint32_t>, uint32_t> GetLeastSpanningTree();
-  TsmResult& SolveTravelingSalesmanProblem();
+  TsmResult SolveTravelingSalesmanProblem();
   TsmResult SolveTravelingSalesmanProblemAnnealing();
   TsmResult SolveTravelingSalesmanProblemNearestNeighbor();
 
