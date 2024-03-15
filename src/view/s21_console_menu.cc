@@ -64,3 +64,8 @@ void s21::ConsoleMenu::PrintMatrix(
     out_ << std::endl;
   }
 }
+
+void s21::ConsoleMenu::PrintValue(const uint32_t value,
+                                  const std::string& desc) {
+  out_ << kGreen << kBold << desc << value << kResetColor << std::endl;
+}

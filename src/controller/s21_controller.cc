@@ -13,6 +13,18 @@ std::vector<uint32_t> s21::Controller::BreadthFirstSearch(
   return s21::GraphAlgorithms::BreadthFirstSearch(graph_, start_vertex);
 }
 
+int s21::Controller::GetShortestPathBetweenVertices(int vertex1, int vertex2) {
+  return s21::GraphAlgorithms::GetShortestPathBetweenVertices(graph_, vertex1,
+                                                              vertex2);
+}
+
+std::pair<std::vector<uint32_t>, uint32_t>
+s21::Controller::GetShortestPathsBetweenAllVertices() {
+  return std::pair<std::vector<uint32_t>, uint32_t>(
+      s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(graph_),
+      graph_.GetSize());
+}
+
 std::pair<std::vector<uint32_t>, uint32_t>
 s21::Controller::GetLeastSpanningTree() {
   return std::pair<std::vector<uint32_t>, uint32_t>(

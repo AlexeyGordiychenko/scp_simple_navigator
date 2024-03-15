@@ -31,6 +31,7 @@ class ConsoleMenu {
   void PrintVector(const std::vector<uint32_t>& v, const std::string& desc);
   void PrintMatrix(const std::pair<std::vector<uint32_t>, uint32_t>& data,
                    const std::string& desc);
+  void PrintValue(const uint32_t value, const std::string& desc);
 
   template <typename... Args, typename... Prompts, std::size_t... I>
   void CallMenuFunctionImpl(std::function<void(Args...)> func,
