@@ -11,7 +11,7 @@ s21::TsmResult s21::TSPNearestNeighbor::Solve() {
   auto matrix = graph_.GetGraph();
   auto size = graph_.GetSize();
 
-  TsmResult result;
+  TsmResult result = {{}, 0.0};
   std::vector<bool> visited(size, false);
   std::uniform_real_distribution<> dis(0, size - 1);
   uint32_t start_vertex = dis(generator_);
