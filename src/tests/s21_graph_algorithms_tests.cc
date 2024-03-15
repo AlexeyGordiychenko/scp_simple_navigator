@@ -199,3 +199,71 @@ TEST(LeastSpanningTree, 4) {
   std::vector<uint32_t> result = {0};
   EXPECT_EQ(s21::GraphAlgorithms::GetLeastSpanningTree(graph), result);
 }
+
+TEST(TheSalesmanProblem, 0) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/tsp_graph_2.txt");
+  s21::TsmResult result = {{5, 9, 4, 7, 0, 8, 10, 2, 1, 6, 3}, 266.0};
+  auto solution = s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+      graph, 1000, 0.9, 42);
+  EXPECT_EQ(solution.vertices, result.vertices);
+  EXPECT_DOUBLE_EQ(solution.distance, result.distance);
+}
+
+TEST(TheSalesmanProblem, 1) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/tsp_graph_2.txt");
+  s21::TsmResult result = {{4, 3, 5, 9, 7, 2, 10, 1, 0, 8, 6}, 306.0};
+  s21::TsmResult solution =
+      s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(graph,
+                                                                         69);
+  std::cout << "SOLUTIONS DISTANCE: " << solution.distance << std::endl;
+  EXPECT_EQ(solution.vertices, result.vertices);
+  EXPECT_DOUBLE_EQ(solution.distance, result.distance);
+}
+
+TEST(TheSalesmanProblem, 3) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/tsp_graph_3.txt");
+  EXPECT_THAT(
+      [&]() {
+        s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+            graph, 1000, 0.9, 42);
+      },
+      testing::ThrowsMessage<std::runtime_error>(
+          testing::HasSubstr("Graph is not connected.")));
+}
+
+TEST(TheSalesmanProblem, 4) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/tsp_graph_3.txt");
+  EXPECT_THAT(
+      [&]() {
+        s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
+            graph, 42);
+      },
+      testing::ThrowsMessage<std::runtime_error>(
+          testing::HasSubstr("Graph is not connected.")));
+}
+
+TEST(TheSalesmanProblem, 5) {
+  s21::Graph graph;
+  EXPECT_THAT(
+      [&]() {
+        s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
+            graph, 1000, 0.9, 42);
+      },
+      testing::ThrowsMessage<std::runtime_error>(
+          testing::HasSubstr("Graph is empty.")));
+}
+
+TEST(TheSalesmanProblem, 6) {
+  s21::Graph graph;
+  EXPECT_THAT(
+      [&]() {
+        s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
+            graph, 42);
+      },
+      testing::ThrowsMessage<std::runtime_error>(
+          testing::HasSubstr("Graph is empty.")));
+}
