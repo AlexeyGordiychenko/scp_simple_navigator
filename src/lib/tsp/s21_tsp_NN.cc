@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 s21::TsmResult s21::TSPNearestNeighbor::Solve() {
+  if (graph_.GetSize() <= 0) throw std::runtime_error("Graph is empty.");
   if (!graph_.IsConnected())
     throw std::runtime_error("Graph is not connected.");
 
