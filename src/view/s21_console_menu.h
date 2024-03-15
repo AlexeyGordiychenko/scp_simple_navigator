@@ -1,7 +1,9 @@
 #ifndef S21_A2_MENU_H_
 #define S21_A2_MENU_H_
 
+#include <chrono>
 #include <functional>
+#include <iomanip>
 #include <iostream>
 #include <limits>
 #include <string>
@@ -57,6 +59,11 @@ class ConsoleMenu {
                          std::make_index_sequence<sizeof...(Args)>{});
   }
 
+  template <typename... Funcs>
+  void MeasureFunctionsTime(uint32_t n, Funcs... funcs) {
+    (MeasureSingleFunctionTime(n, funcs), ...);
+  }
+
  private:
   std::string invalid_choice_message_;
   std::string prompt_;
@@ -90,6 +97,22 @@ class ConsoleMenu {
         out_ << invalid_choice_message_;
       }
     }
+  }
+
+  template <typename Func>
+  void MeasureSingleFunctionTime(
+      uint32_t n, const std::pair<Func, std::string>& func_text_pair) {
+    auto start = std::chrono::high_resolution_clock::now();
+    for (uint32_t i = 0; i < n; ++i) {
+      func_text_pair.first();
+    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration =
+        std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+    std::cout << kGreen << kBold << "Execution time for "
+              << func_text_pair.second << ": " << std::fixed
+              << std::setprecision(3) << (duration.count() / 1000.0)
+              << " seconds" << kResetColor << std::endl;
   }
 };
 }  // namespace s21

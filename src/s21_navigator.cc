@@ -89,6 +89,27 @@ int main() {
               }),
               std::make_tuple());
         }},
+       {"Compare TSP algorithms",
+        [&menu, &controller] {
+          menu.CallMenuFunction(
+              static_cast<std::function<void(uint32_t)>>([&menu, &controller](
+                                                             uint32_t n) {
+                menu.MeasureFunctionsTime(
+                    n,
+                    std::make_pair(
+                        std::bind(&s21::Controller::
+                                      SolveTravelingSalesmanProblemAnnealing,
+                                  &controller),
+                        std::string("annealing algorithm")),
+                    std::make_pair(
+                        std::bind(
+                            &s21::Controller::
+                                SolveTravelingSalesmanProblemNearestNeighbor,
+                            &controller),
+                        std::string("nearest neighbor algorithm")));
+              }),
+              std::make_tuple("Enter the number of executions: "));
+        }},
        {"Exit", [&running] { running = false; }}});
   while (running) {
     menu();
