@@ -3,7 +3,7 @@
 
 #include "../lib/s21_graph.h"
 #include "../lib/s21_graph_algorithms.h"
-#include "../lib/s21_tsm_result.h"
+#include "../lib/tsp/s21_tsm_result.h"
 
 namespace s21 {
 

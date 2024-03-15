@@ -4,7 +4,7 @@
 #include <random>
 #include <vector>
 
-#include "s21_graph.h"
+#include "../s21_graph.h"
 #include "s21_tsm_result.h"
 
 namespace s21 {

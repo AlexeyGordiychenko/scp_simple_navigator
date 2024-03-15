@@ -6,7 +6,7 @@
 
 #include "../containers/s21_queue.h"
 #include "../containers/s21_stack.h"
-#include "s21_tsm_result.h"
+#include "tsp/s21_tsm_result.h"
 
 namespace s21 {
 class Graph;

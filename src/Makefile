@@ -11,6 +11,7 @@ GCOV_DIR=gcov
 # Directories
 SRC_DIR=.
 LIB_DIR=lib
+LIB_TSP_DIR=lib/tsp
 CONTROLLER_DIR=controller
 VIEW_DIR=view
 SRC_DIRS= $(SRC_DIR) $(CONTROLLER_DIR) $(VIEW_DIR)
@@ -29,6 +30,9 @@ LIBS_SRCS=$(wildcard $(LIB_DIR)/s21_*.cc)
 LIBS_OBJS=$(patsubst $(LIB_DIR)/%.cc,$(OBJ_DIR)/%.o,$(LIBS_SRCS))
 LIBS_OBJS_GCOV=$(patsubst $(LIB_DIR)/%.cc,$(OBJ_DIR_GCOV)/%.o,$(LIBS_SRCS))
 LIBS=$(patsubst $(LIB_DIR)/%.cc,%.a,$(LIBS_SRCS))
+LIBS_TSP_SRCS=$(wildcard $(LIB_TSP_DIR)/s21_*.cc)
+LIBS_TSP_OBJS=$(patsubst $(LIB_TSP_DIR)/%.cc,$(OBJ_DIR)/%.o,$(LIBS_TSP_SRCS))
+LIBS_TSP_OBJS_GCOV=$(patsubst $(LIB_TSP_DIR)/%.cc,$(OBJ_DIR_GCOV)/%.o,$(LIBS_TSP_SRCS))
 CLANG_FILES=$(shell find $(SRC_DIR) \( -name "s21_*.cc" -o -name "s21_*.h" \) -print)
 
 # Builds
@@ -38,7 +42,7 @@ TEST_GCOV=$(TEST)_gcov
 TEST_BUILD=$(TEST)_build
 TEST_BUILD_GCOV=$(TEST_BUILD)_gcov
 
-VPATH=$(TEST_DIR):$(SRC_DIRS):$(LIB_DIR)
+VPATH=$(TEST_DIR):$(SRC_DIRS):$(LIB_DIR):$(LIB_TSP_DIR)
 
 .PHONY: all $(PROGRAM) $(TEST) $(TEST_BUILD) gcov_report clean clean_gcda rebuild clang_n clang_i valgrind valgrind_mac
 
@@ -51,8 +55,11 @@ open: $(PROGRAM)
 $(PROGRAM): $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OFLAGS) $^ -o $(PROGRAM)
 
-$(SRC_DIR)/%.a: $(OBJ_DIR)/%.o
-	ar rcs $@ $<
+s21_graph.a: $(OBJ_DIR)/s21_graph.o 
+	ar rcs $@ $^
+
+s21_graph_algorithms.a: $(LIBS_OBJS) $(LIBS_TSP_OBJS)
+	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.cc
 	@mkdir -p $(OBJ_DIR)
@@ -62,7 +69,7 @@ $(OBJ_DIR)/%.o: %.cc
 $(TEST): $(TEST_BUILD)
 	./$@ || true
 
-$(TEST_BUILD): $(LIBS_OBJS) $(OBJS_TEST)
+$(TEST_BUILD): $(LIBS_OBJS) $(LIBS_TSP_OBJS) $(OBJS_TEST)
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(OFLAGS) -o $(TEST)
 
 $(OBJ_DIR_TEST)/%.o: %.cc
@@ -73,7 +80,7 @@ $(TEST_GCOV): $(TEST_BUILD_GCOV)
 	$(MAKE) clean_gcda
 	./$@ || true
 
-$(TEST_BUILD_GCOV): $(LIBS_OBJS_GCOV) $(OBJS_GCOV)
+$(TEST_BUILD_GCOV): $(LIBS_OBJS_GCOV) $(LIBS_TSP_OBJS_GCOV) $(OBJS_GCOV)
 	$(CC) $(CFLAGS) $^ $(LDFLAGS) $(GCOVFLAGS) -o $(TEST_GCOV)
 
 $(OBJ_DIR_GCOV)/%.o: %.cc
@@ -83,7 +90,7 @@ $(OBJ_DIR_GCOV)/%.o: %.cc
 # Other rules
 gcov_report: $(TEST_GCOV)
 	mkdir -p $(GCOV_DIR)
-	gcovr --html-details -o $(GCOV_DIR)/index.html --filter $(LIB_DIR)/s21_\.\*.cc
+	gcovr --html-details -o $(GCOV_DIR)/index.html --filter $(LIB_DIR)/s21_\.\*.cc --filter $(LIB_TSP_DIR)/s21_\.\*.cc
 	open $(GCOV_DIR)/index.html
 
 lcov_report: $(TEST_GCOV)

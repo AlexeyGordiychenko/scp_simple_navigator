@@ -2,10 +2,10 @@
 
 #include <limits>
 
-#include "s21_ant.h"
 #include "s21_graph.h"
-#include "s21_tsp_NN.h"
-#include "s21_tsp_annealing.h"
+#include "tsp/s21_ant.h"
+#include "tsp/s21_tsp_NN.h"
+#include "tsp/s21_tsp_annealing.h"
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
