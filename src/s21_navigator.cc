@@ -69,8 +69,19 @@ int main() {
               }),
               std::make_tuple());
         }},
-       //  {"The salesman problem",
-       //   [&controller] { controller.SolveTravelingSalesmanProblem(); }},
+       {"The salesman problem (ant colony)",
+        [&menu, &controller] {
+          menu.CallMenuFunction(
+              static_cast<std::function<void()>>([&menu, &controller]() {
+                auto result = controller.SolveTravelingSalesmanProblem();
+                menu.PrintVector(
+                    result.vertices,
+                    "TSM result (ant colony) with distance " +
+                        std::to_string(static_cast<uint32_t>(result.distance)) +
+                        ":\n");
+              }),
+              std::make_tuple());
+        }},
        {"The salesman problem (annealing)",
         [&menu, &controller] {
           menu.CallMenuFunction(
@@ -106,6 +117,11 @@ int main() {
                                                              uint32_t n) {
                 menu.MeasureFunctionsTime(
                     n,
+                    std::make_pair(
+                        std::bind(
+                            &s21::Controller::SolveTravelingSalesmanProblem,
+                            &controller),
+                        std::string("ant colony algorithm")),
                     std::make_pair(
                         std::bind(&s21::Controller::
                                       SolveTravelingSalesmanProblemAnnealing,

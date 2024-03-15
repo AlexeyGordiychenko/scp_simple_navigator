@@ -31,6 +31,10 @@ s21::Controller::GetLeastSpanningTree() {
       s21::GraphAlgorithms::GetLeastSpanningTree(graph_), graph_.GetSize());
 }
 
+s21::TsmResult s21::Controller::SolveTravelingSalesmanProblem() {
+  return s21::GraphAlgorithms::SolveTravelingSalesmanProblem(graph_);
+}
+
 s21::TsmResult s21::Controller::SolveTravelingSalesmanProblemAnnealing() {
   return s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
       graph_, 1000, 0.9);
