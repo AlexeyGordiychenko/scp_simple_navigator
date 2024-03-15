@@ -2,6 +2,7 @@
 
 #include <limits>
 
+#include "s21_ant.h"
 #include "s21_graph.h"
 #include "s21_tsp_NN.h"
 #include "s21_tsp_annealing.h"
@@ -128,16 +129,114 @@ std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
   return mst;
 }
 
-s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
-    const s21::Graph &graph, const double initial_temperature,
-    const double cooling_rate, const unsigned seed) {
-  TSPAnnealing tsp(graph, initial_temperature, cooling_rate, seed);
-  return tsp.Solve();
+int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
+                                                         int vertex1,
+                                                         int vertex2) {
+  int size = graph.GetSize();
+  if (vertex1 >= size || vertex2 >= size) {
+    throw std::out_of_range("Vertex doesn't exist.");
+  }
+
+  int max_dist = INT32_MAX;
+  std::vector<unsigned int> dist(size, max_dist);
+  std::vector<bool> visited(size, false);
+  dist[vertex1] = 0;
+
+  while (true) {
+    unsigned int minDist = max_dist;
+    int j = -1;
+    for (int i = 0; i < size; ++i) {
+      if (!visited[i] && dist[i] < minDist) {
+        minDist = dist[i];
+        j = i;
+      }
+    }
+    if (j == -1) {
+      break;
+    }
+    visited[j] = true;
+    for (int i = 0; i < size; ++i) {
+      if (graph.GetGraph()[j * size + i] != 0 &&
+          dist[j] + graph.GetGraph()[j * size + i] < dist[i]) {
+        dist[i] = dist[j] + graph.GetGraph()[j * size + i];
+      }
+    }
+  }
+
+  return dist[vertex2];
 }
 
-s21::TsmResult
-s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
-    const s21::Graph &graph, const unsigned seed) {
-  TSPNearestNeighbor tsp(graph, seed);
-  return tsp.Solve();
+s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
+    Graph &graph) {
+  int size = graph.GetSize();
+  unsigned int max_dist = INT32_MAX;
+  s21::Graph::Matrix dist(size * size, max_dist);
+
+  for (int i = 0; i < size; i++) {
+    for (int j = 0; j < size; j++) {
+      if (graph.GetGraph()[i * size + j] == 0 && i != j) continue;
+      dist[i * size + j] = graph.GetGraph()[i * size + j];
+    }
+  }
+
+  for (int k = 0; k < size; k++) {
+    for (int i = 0; i < size; i++) {
+      for (int j = 0; j < size; j++) {
+        if (dist[i * size + j] > dist[i * size + k] + dist[k * size + j]) {
+          dist[i * size + j] = dist[i * size + k] + dist[k * size + j];
+        }
+      }
+    }
+  }
+
+  return dist;
+}
+
+s21::TsmResult &s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
+    Graph &graph) {
+  const int NUM_ANTS = 1500;
+  const int NUM_ITER = 30;
+  const double ALPHA = 1;
+  const double BETA = 2;
+  const double Q = .4;
+  const int SIZE = graph.GetSize() * graph.GetSize();
+
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<int> dist(1, graph.GetSize());
+
+  std::vector<double> pheromone(SIZE, 1.0);
+  std::vector<double> visibility(SIZE, 1.0);
+  for (int i = 0; i < SIZE; i++) {
+    visibility[i] = 1.0 / graph.GetGraph()[i];
+    if (std::isnan(visibility[i])) visibility[i] = 0;
+  }
+
+  int best_distance = INT32_MAX;
+  std::vector<int> best_tour;
+
+  for (int iter = 0; iter < NUM_ITER; iter++) {
+    std::vector<double> deltapheromone(SIZE, 0.0);
+    for (int i = 0; i < NUM_ANTS; i++) {
+      Ant ant(graph, pheromone, visibility, deltapheromone, gen, ALPHA, BETA);
+      ant.constructTour();
+      int distance = 0;
+      for (int i = 0; i < (int)ant.GetTour().size() - 1; i++)
+        distance += graph.GetGraph()[ant.GetTour()[i] * graph.GetSize() +
+                                     ant.GetTour()[i + 1]];
+      distance += graph.GetGraph()[ant.GetTour().back() * graph.GetSize() +
+                                   ant.GetTour().front()];
+      if (distance < best_distance) {
+        best_distance = distance;
+        best_tour = ant.GetTour();
+      }
+    }
+    for (int i = 0; i < SIZE; i++)
+      pheromone[i] = (1.0 - Q) * pheromone[i] + deltapheromone[i];
+  }
+
+  TsmResult *result = new TsmResult;
+  result->distance = best_distance;
+  result->vertices = best_tour;
+  return *result;
 }

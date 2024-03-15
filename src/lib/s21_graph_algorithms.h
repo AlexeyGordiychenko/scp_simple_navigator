@@ -11,6 +11,11 @@
 namespace s21 {
 class Graph;
 
+struct TsmResult {
+  std::vector<int> vertices;
+  double distance;
+};
+
 class GraphAlgorithms {
  public:
   // Methods
@@ -20,8 +25,7 @@ class GraphAlgorithms {
                                                   uint32_t start_vertex);
   static int GetShortestPathBetweenVertices(Graph& graph, int vertex1,
                                             int vertex2);
-  static void GetShortestPathsBetweenAllVertices(
-      Graph& graph);  // TODO: return value
+  static std::vector<uint32_t> GetShortestPathsBetweenAllVertices(Graph& graph);
   static std::vector<uint32_t> GetLeastSpanningTree(Graph& graph);
   static TsmResult& SolveTravelingSalesmanProblem(Graph& graph);
   static TsmResult SolveTravelingSalesmanProblemAnnealing(
