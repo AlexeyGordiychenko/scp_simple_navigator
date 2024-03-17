@@ -17,13 +17,13 @@ s21::TsmResult s21::TSPNearestNeighbor::Solve() {
   uint32_t start_vertex = dis(generator_);
   uint32_t current_vertex = start_vertex;
 
-  result.vertices.push_back(current_vertex);
+  result.vertices.push_back(current_vertex + 1);
   visited[current_vertex] = true;
 
   // Main loop
   for (uint32_t i = 1; i < size; ++i) {
     uint32_t nearest_vertex = FindNearestUnvisited(current_vertex, visited);
-    result.vertices.push_back(nearest_vertex);
+    result.vertices.push_back(nearest_vertex + 1);
     result.distance += matrix[current_vertex * size + nearest_vertex];
     visited[nearest_vertex] = true;
     current_vertex = nearest_vertex;

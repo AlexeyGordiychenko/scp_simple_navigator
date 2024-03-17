@@ -34,7 +34,7 @@ s21::TsmResult s21::TSPAnnealing::Solve() {
 
 s21::TsmResult s21::TSPAnnealing::GenerateRandomResult() {
   TsmResult result = {std::vector<uint32_t>(graph_.GetSize()), 0.0};
-  std::iota(result.vertices.begin(), result.vertices.end(), 0);
+  std::iota(result.vertices.begin(), result.vertices.end(), 1);
   std::shuffle(result.vertices.begin(), result.vertices.end(), generator_);
   CalculateCost(result);
   return result;
