@@ -28,7 +28,7 @@ class Ant {
   std::vector<double>& pheromone_;
   std::vector<double>& deltapheromone_;
   std::vector<double>& visibility_;
-  std::mt19937& gen;
+  std::mt19937& gen_;
 
   int selectNextCity(int currentCity, const vector<bool>& visited);
 };

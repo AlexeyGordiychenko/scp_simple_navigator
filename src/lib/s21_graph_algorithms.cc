@@ -147,8 +147,14 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
                                                          int vertex1,
                                                          int vertex2) {
   int size = graph.GetSize();
-  if (vertex1 >= size || vertex2 >= size) {
+  if (vertex1 > size || vertex2 > size || vertex1 < 1 || vertex2 < 1) {
     throw std::out_of_range("Vertex doesn't exist.");
+  }
+  --vertex1;
+  --vertex2;
+
+  if (vertex1 == vertex2) {
+    return graph.GetGraph()[vertex1 * size + vertex2];
   }
 
   int max_dist = INT32_MAX;
@@ -177,6 +183,9 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
     }
   }
 
+  for_each(dist.begin(), dist.end(), [max_dist](unsigned int &x) {
+    if (x == static_cast<unsigned int>(max_dist)) x = 0;
+  });
   return dist[vertex2];
 }
 
@@ -203,11 +212,18 @@ s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
     }
   }
 
+  for_each(dist.begin(), dist.end(), [max_dist](unsigned int &x) {
+    if (x == static_cast<unsigned int>(max_dist)) x = 0;
+  });
   return dist;
 }
 
 s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
     Graph &graph) {
+  if (graph.GetSize() == 1) {
+    return {std::vector<u_int32_t>{0, 0}, (double)graph.GetGraph()[0]};
+  }
+
   const int NUM_ANTS = 1500;
   const int NUM_ITER = 30;
   const double ALPHA = 1;
@@ -226,7 +242,7 @@ s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
     if (std::isnan(visibility[i])) visibility[i] = 0;
   }
 
-  int best_distance = INT32_MAX;
+  double best_distance = INT32_MAX;
   std::vector<u_int32_t> best_tour;
 
   for (int iter = 0; iter < NUM_ITER; iter++) {
@@ -249,5 +265,7 @@ s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
       pheromone[i] = (1.0 - Q) * pheromone[i] + deltapheromone[i];
   }
 
-  return {best_tour, static_cast<double>(best_distance)};
+  for_each(best_tour.begin(), best_tour.end(), [](u_int32_t &i) { ++i; });
+
+  return {best_tour, best_distance};
 }

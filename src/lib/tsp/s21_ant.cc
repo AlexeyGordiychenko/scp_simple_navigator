@@ -13,14 +13,14 @@ s21::Ant::Ant(Graph& graph, std::vector<double>& pheromone,
       pheromone_(pheromone),
       deltapheromone_(deltapheromone),
       visibility_(visibility),
-      gen(gen) {}
+      gen_(gen) {}
 
 void s21::Ant::constructTour() {
   tour_.clear();
   vector<bool> visited(graph_.GetSize(), false);
 
   std::uniform_int_distribution<int> dist(0, graph_.GetSize() - 1);
-  int start_city = dist(gen);
+  int start_city = dist(gen_);
 
   tour_.push_back(start_city);
   visited[start_city] = true;
@@ -74,7 +74,7 @@ int s21::Ant::selectNextCity(int currentCity, const vector<bool>& visited) {
   }
 
   std::uniform_int_distribution<int> dist(0, 99);
-  double selectionValue = ((double)dist(gen)) / 100.0;
+  double selectionValue = ((double)dist(gen_)) / 100.0;
 
   double currentSum = 0.0;
   for (int city = 0; city < (int)graph_.GetSize(); city++) {
