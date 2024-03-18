@@ -42,7 +42,7 @@ s21::TsmResult s21::TSPAnnealing::GenerateRandomResult() {
 
 s21::TsmResult s21::TSPAnnealing::SwapVertices(const s21::TsmResult& result) {
   auto new_result = result;
-  std::uniform_real_distribution<> dis(0, graph_.GetSize() - 1);
+  std::uniform_int_distribution<> dis(0, graph_.GetSize() - 1);
   std::swap(new_result.vertices[dis(generator_)],
             new_result.vertices[dis(generator_)]);
   CalculateCost(new_result);
