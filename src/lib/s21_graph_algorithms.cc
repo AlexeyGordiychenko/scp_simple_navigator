@@ -220,6 +220,7 @@ s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
 
 s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
     Graph &graph) {
+  if (graph.GetSize() <= 0) throw std::runtime_error("Graph is empty.");
   if (graph.GetSize() == 1) {
     return {std::vector<u_int32_t>{0, 0}, (double)graph.GetGraph()[0]};
   }
