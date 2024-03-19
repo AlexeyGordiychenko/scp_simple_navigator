@@ -53,6 +53,16 @@ TEST(dijkstras_algorithm_test, graph_directed_3) {
   EXPECT_EQ(dist, 9);
 }
 
+TEST(dijkstras_algorithm_test, graph_directed_3_vertex_not_exist) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THROW(algorithms.GetShortestPathBetweenVertices(graph, -1, 1),
+               std::out_of_range);
+  EXPECT_THROW(algorithms.GetShortestPathBetweenVertices(graph, 1, 19),
+               std::out_of_range);
+}
+
 TEST(floyd_warshall_algorithm_test, graph_directed_3) {
   std::vector<unsigned int> expected = {
       0,  1,  3, 2, 3,  4,  1,  1, 7,  8,  4,  2, 6, 6, 5,  0,  0,  0,  1,  0,
