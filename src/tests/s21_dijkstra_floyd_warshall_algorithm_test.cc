@@ -63,6 +63,15 @@ TEST(dijkstras_algorithm_test, graph_directed_3_vertex_not_exist) {
                std::out_of_range);
 }
 
+TEST(dijkstras_algorithm_test, inc_graph_empty) {
+  s21::Graph graph;
+  EXPECT_THROW(graph.LoadGraphFromFile("tests/files/inc_graph_empty.txt"),
+               std::runtime_error);
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THROW(algorithms.GetShortestPathBetweenVertices(graph, 1, 11),
+               std::runtime_error);
+}
+
 TEST(floyd_warshall_algorithm_test, graph_directed_3) {
   std::vector<unsigned int> expected = {
       0,  1,  3, 2, 3,  4,  1,  1, 7,  8,  4,  2, 6, 6, 5,  0,  0,  0,  1,  0,
@@ -92,4 +101,13 @@ TEST(floyd_warshall_algorithm_test, graph_directed_3) {
                 expected[i * graph.GetSize() + j]);
     }
   }
+}
+
+TEST(floyd_warshall_algorithm_test, inc_graph_empty) {
+  s21::Graph graph;
+  EXPECT_THROW(graph.LoadGraphFromFile("tests/files/inc_graph_empty.txt"),
+               std::runtime_error);
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THROW(algorithms.GetShortestPathsBetweenAllVertices(graph),
+               std::runtime_error);
 }

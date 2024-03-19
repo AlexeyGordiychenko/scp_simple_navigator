@@ -35,3 +35,12 @@ TEST(aco_algorithm_test, not_connected_graph) {
   EXPECT_THROW(algorithms.SolveTravelingSalesmanProblem(graph);
                , std::runtime_error);
 }
+
+TEST(aco_algorithm_test, empty_graph) {
+  s21::Graph graph;
+  EXPECT_THROW(graph.LoadGraphFromFile("tests/files/inc_graph_empty.txt"),
+               std::runtime_error);
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THROW(algorithms.SolveTravelingSalesmanProblem(graph);
+               , std::runtime_error);
+}

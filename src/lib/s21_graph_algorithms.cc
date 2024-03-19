@@ -148,6 +148,7 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
                                                          int vertex1,
                                                          int vertex2) {
   int size = graph.GetSize();
+  if (graph.GetSize() == 0) throw std::runtime_error("Graph is empty.");
   if (vertex1 > size || vertex2 > size || vertex1 < 1 || vertex2 < 1) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -193,6 +194,7 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
 
 s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
     Graph &graph) {
+  if (graph.GetSize() == 0) throw std::runtime_error("Graph is empty.");
   int size = graph.GetSize();
   unsigned int max_dist = INT32_MAX;
   s21::Graph::Matrix dist(size * size, max_dist);
