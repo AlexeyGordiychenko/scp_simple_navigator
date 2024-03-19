@@ -3,12 +3,15 @@
 #include <algorithm>
 #include <stdexcept>
 
+#include "../s21_graph_algorithms.h"
 #include "s21_ant.h"
 
 s21::TsmResult s21::TSPAntColonyOptimization::Solve() {
-  if (graph_.GetSize() <= 0) throw std::runtime_error("Graph is empty.");
   if (graph_.GetSize() == 1) {
-    return {std::vector<u_int32_t>{0, 0}, (double)graph_.GetGraph()[0]};
+    return {std::vector<u_int32_t>{1, 1}, (double)graph_.GetGraph()[0]};
+  }
+  if (GraphAlgorithms::DepthFirstSearch(graph_, 1).size() != graph_.GetSize()) {
+    throw std::runtime_error("Graph is not connected.");
   }
 
   const int NUM_ANTS = 1500;

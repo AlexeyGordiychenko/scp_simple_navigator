@@ -77,15 +77,17 @@ int s21::Ant::selectNextCity(int currentCity, const vector<bool>& visited) {
   double selectionValue = ((double)dist(gen_)) / 100.0;
 
   double currentSum = 0.0;
+  int next_city = -1;
   for (int city = 0; city < (int)graph_.GetSize(); city++) {
     if (!visited[city]) {
       currentSum += probabilities[city];
       if (currentSum >= selectionValue) {
-        return city;
+        next_city = city;
+        break;
       }
     }
   }
-  return -1;
+  return next_city;
 }
 
 #endif  // S21_ANT_CC

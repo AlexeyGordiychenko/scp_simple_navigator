@@ -27,3 +27,11 @@ TEST(aco_algorithm_test, single_node_graph) {
   s21::TsmResult result = algorithms.SolveTravelingSalesmanProblem(graph);
   EXPECT_EQ(result.distance, 5);
 }
+
+TEST(aco_algorithm_test, not_connected_graph) {
+  s21::Graph graph;
+  graph.LoadGraphFromFile("tests/files/graph_directed_3.txt");
+  s21::GraphAlgorithms algorithms;
+  EXPECT_THROW(algorithms.SolveTravelingSalesmanProblem(graph);
+               , std::runtime_error);
+}

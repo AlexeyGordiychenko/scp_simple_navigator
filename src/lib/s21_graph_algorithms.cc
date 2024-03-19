@@ -5,6 +5,7 @@
 #include "s21_graph.h"
 #include "tsp/s21_ant.h"
 #include "tsp/s21_tsp_NN.h"
+#include "tsp/s21_tsp_aco.h"
 #include "tsp/s21_tsp_annealing.h"
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
@@ -150,6 +151,7 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
   if (vertex1 > size || vertex2 > size || vertex1 < 1 || vertex2 < 1) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
+
   --vertex1;
   --vertex2;
 
@@ -217,8 +219,6 @@ s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
   });
   return dist;
 }
-
-#include "tsp/s21_tsp_aco.h"
 
 s21::TsmResult s21::GraphAlgorithms::SolveTravelingSalesmanProblem(
     Graph &graph) {
