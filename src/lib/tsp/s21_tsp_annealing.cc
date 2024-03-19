@@ -28,7 +28,8 @@ s21::TsmResult s21::TSPAnnealing::Solve() {
     // Update the temperature
     temperature_ *= cooling_rate_;
   }
-
+  // Return to the starting point
+  result.vertices.push_back(result.vertices.front());
   return result;
 }
 

@@ -31,6 +31,7 @@ s21::TsmResult s21::TSPNearestNeighbor::Solve() {
 
   // Return to the starting vertex
   result.distance += matrix[current_vertex * size + start_vertex];
+  result.vertices.push_back(result.vertices.front());
 
   return result;
 }
