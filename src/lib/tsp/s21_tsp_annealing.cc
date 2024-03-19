@@ -58,6 +58,6 @@ void s21::TSPAnnealing::CalculateCost(s21::TsmResult& result) {
         matrix[(result.vertices[i] - 1) * size + (result.vertices[i + 1] - 1)];
   }
   // Add the distance of returning to the starting vertex
-  result.distance +=
-      matrix[result.vertices.back() * size + result.vertices.front()];
+  result.distance += matrix[(result.vertices.back() - 1) * size +
+                            (result.vertices.front() - 1)];
 }

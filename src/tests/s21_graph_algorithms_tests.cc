@@ -203,7 +203,7 @@ TEST(LeastSpanningTree, 4) {
 TEST(TheSalesmanProblem, 0) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/tsp_graph_2.txt");
-  s21::TsmResult result = {{10, 6, 4, 5, 3, 8, 1, 9, 11, 2, 7}, 173.0};
+  s21::TsmResult result = {{8, 5, 4, 10, 6, 3, 7, 2, 11, 1, 9}, 256.0};
   auto solution = s21::GraphAlgorithms::SolveTravelingSalesmanProblemAnnealing(
       graph, 1000, 0.9, 42);
   EXPECT_EQ(solution.vertices, result.vertices);
