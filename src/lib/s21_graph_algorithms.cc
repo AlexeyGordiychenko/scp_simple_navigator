@@ -11,6 +11,7 @@
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
   auto size = graph.GetSize();
+  if (size == 0) throw std::runtime_error("Graph is empty.");
   if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -41,6 +42,7 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
 std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
   auto size = graph.GetSize();
+  if (size == 0) throw std::runtime_error("Graph is empty.");
   if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -71,17 +73,17 @@ std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
 
 std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
     s21::Graph &graph) {
+  auto size = graph.GetSize();
+  if (size == 0) throw std::runtime_error("Graph is empty.");
   if (graph.IsDirected()) {
     throw std::runtime_error(
         "It's not possible to find a least spanning tree in a directed graph "
         "with Prim's algorithm.");
   }
-  auto size = graph.GetSize();
   auto matrix = graph.GetGraph();
 
   std::vector<uint32_t> mst(size * size, 0);
 
-  if (size == 0) return mst;
   if (size == 1) {
     mst[0] = matrix[0];
     return mst;

@@ -67,6 +67,13 @@ TEST(DepthFirstSearchTestCase, 8) {
                std::out_of_range);
 }
 
+TEST(DepthFirstSearchTestCase, 9) {
+  s21::Graph graph;
+  EXPECT_THAT([&]() { s21::GraphAlgorithms::DepthFirstSearch(graph, 1); },
+              testing::ThrowsMessage<std::runtime_error>(
+                  testing::HasSubstr("Graph is empty")));
+}
+
 TEST(BreadthFirstSearchTestCase, 0) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/graph_undirected_1.txt");
@@ -134,6 +141,13 @@ TEST(BreadthFirstSearchTestCase, 8) {
                std::out_of_range);
 }
 
+TEST(BreadthFirstSearchTestCase, 9) {
+  s21::Graph graph;
+  EXPECT_THAT([&]() { s21::GraphAlgorithms::BreadthFirstSearch(graph, 1); },
+              testing::ThrowsMessage<std::runtime_error>(
+                  testing::HasSubstr("Graph is empty")));
+}
+
 TEST(LeastSpanningTree, 0) {
   s21::Graph graph;
   graph.LoadGraphFromFile("tests/files/spanning_tree_1.txt");
@@ -198,6 +212,13 @@ TEST(LeastSpanningTree, 4) {
   graph.LoadGraphFromFile("tests/files/spanning_tree_4.txt");
   std::vector<uint32_t> result = {0};
   EXPECT_EQ(s21::GraphAlgorithms::GetLeastSpanningTree(graph), result);
+}
+
+TEST(LeastSpanningTree, 5) {
+  s21::Graph graph;
+  EXPECT_THAT([&]() { s21::GraphAlgorithms::GetLeastSpanningTree(graph); },
+              testing::ThrowsMessage<std::runtime_error>(
+                  testing::HasSubstr("Graph is empty")));
 }
 
 TEST(TheSalesmanProblem, 0) {
