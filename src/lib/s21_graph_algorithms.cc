@@ -9,7 +9,7 @@
 #include "tsp/s21_tsp_annealing.h"
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
-    s21::Graph &graph, uint32_t start_vertex) {
+    const s21::Graph &graph, uint32_t start_vertex) {
   if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   auto size = graph.GetSize();
   if (start_vertex > size || start_vertex <= 0) {
@@ -40,7 +40,7 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
 }
 
 std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
-    s21::Graph &graph, uint32_t start_vertex) {
+    const s21::Graph &graph, uint32_t start_vertex) {
   if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   auto size = graph.GetSize();
   if (start_vertex > size || start_vertex <= 0) {
@@ -72,7 +72,7 @@ std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
 }
 
 std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
-    s21::Graph &graph) {
+    const s21::Graph &graph) {
   if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   if (graph.IsDirected()) {
     throw std::runtime_error(

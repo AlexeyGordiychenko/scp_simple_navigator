@@ -14,14 +14,14 @@ class Graph;
 class GraphAlgorithms {
  public:
   // Methods
-  static std::vector<uint32_t> DepthFirstSearch(Graph& graph,
+  static std::vector<uint32_t> DepthFirstSearch(const Graph& graph,
                                                 uint32_t start_vertex);
-  static std::vector<uint32_t> BreadthFirstSearch(Graph& graph,
+  static std::vector<uint32_t> BreadthFirstSearch(const Graph& graph,
                                                   uint32_t start_vertex);
   static int GetShortestPathBetweenVertices(Graph& graph, int vertex1,
                                             int vertex2);
   static std::vector<uint32_t> GetShortestPathsBetweenAllVertices(Graph& graph);
-  static std::vector<uint32_t> GetLeastSpanningTree(Graph& graph);
+  static std::vector<uint32_t> GetLeastSpanningTree(const Graph& graph);
   static TsmResult SolveTravelingSalesmanProblem(Graph& graph);
   static TsmResult SolveTravelingSalesmanProblemAnnealing(
       const Graph& graph, const double initial_temperature,
