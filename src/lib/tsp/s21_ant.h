@@ -1,13 +1,10 @@
-#ifndef S21_ANT_H
+#ifndef S21_A2_ANT_H_
+#define S21_A2_ANT_H_
 
-#include <math.h>
-
-#include <algorithm>
 #include <random>
 #include <vector>
 
 #include "../s21_graph.h"
-#include "../s21_graph_algorithms.h"
 
 using namespace std;
 
@@ -35,5 +32,4 @@ class Ant {
 };
 
 }  // namespace s21
-
-#endif  // S21_ANT_H_
+#endif  // S21_A2_ANT_H_

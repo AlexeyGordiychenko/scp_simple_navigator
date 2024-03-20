@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <stdexcept>
 
-#include "../s21_graph_algorithms.h"
 #include "s21_ant.h"
 
 s21::TsmResult s21::TSPAntColonyOptimization::Solve() {

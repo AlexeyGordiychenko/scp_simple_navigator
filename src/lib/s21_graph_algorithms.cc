@@ -1,9 +1,9 @@
 #include "s21_graph_algorithms.h"
 
+#include <algorithm>
 #include <limits>
 
 #include "s21_graph.h"
-#include "tsp/s21_ant.h"
 #include "tsp/s21_tsp_NN.h"
 #include "tsp/s21_tsp_aco.h"
 #include "tsp/s21_tsp_annealing.h"

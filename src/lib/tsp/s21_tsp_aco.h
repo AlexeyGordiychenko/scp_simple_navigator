@@ -1,5 +1,5 @@
-#ifndef S21_TSP_ACO
-#define S21_TSP_ACO
+#ifndef S21_A2_TSP_ACO_H_
+#define S21_A2_TSP_ACO_H_
 
 #include <random>
 #include <vector>
@@ -25,4 +25,4 @@ class TSPAntColonyOptimization {
   Graph& graph_;
 };
 }  // namespace s21
-#endif  // S21_TSP_ACO
+#endif  // S21_A2_TSP_ACO_H_

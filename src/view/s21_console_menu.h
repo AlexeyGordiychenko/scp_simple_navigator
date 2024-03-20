@@ -1,5 +1,5 @@
-#ifndef S21_A2_MENU_H_
-#define S21_A2_MENU_H_
+#ifndef S21_A2_CONSOLE_MENU_H_
+#define S21_A2_CONSOLE_MENU_H_
 
 #include <chrono>
 #include <functional>
@@ -117,4 +117,4 @@ class ConsoleMenu {
   }
 };
 }  // namespace s21
-#endif  // S21_A2_MENU_H_
+#endif  // S21_A2_CONSOLE_MENU_H_

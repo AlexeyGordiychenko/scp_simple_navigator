@@ -1,7 +1,8 @@
-#ifndef S21_ANT_CC
-#define S21_ANT_CC
-
 #include "s21_ant.h"
+
+#include <math.h>
+
+#include <algorithm>
 
 s21::Ant::Ant(Graph& graph, std::vector<double>& pheromone,
               std::vector<double>& visibility,
@@ -89,5 +90,3 @@ int s21::Ant::selectNextCity(int currentCity, const vector<bool>& visited) {
   }
   return next_city;
 }
-
-#endif  // S21_ANT_CC

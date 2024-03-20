@@ -1,8 +1,6 @@
 #include <limits>
 
-#include "../lib/s21_graph.h"
-#include "../lib/s21_graph_algorithms.h"
-#include "s21_navigator_tests.h"
+#include "s21_graph_algorithms_tests.h"
 
 TEST(aco_algorithm_test, tsp_graph_1) {
   s21::Graph graph;
