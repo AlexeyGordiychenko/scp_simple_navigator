@@ -238,7 +238,6 @@ TEST(TheSalesmanProblem, 1) {
   s21::TsmResult solution =
       s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(graph,
                                                                          69);
-  std::cout << "SOLUTIONS DISTANCE: " << solution.distance << std::endl;
   EXPECT_EQ(solution.vertices, result.vertices);
   EXPECT_DOUBLE_EQ(solution.distance, result.distance);
 }
