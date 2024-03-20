@@ -10,8 +10,8 @@
 
 std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
+  if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   auto size = graph.GetSize();
-  if (size == 0) throw std::runtime_error("Graph is empty.");
   if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -41,8 +41,8 @@ std::vector<uint32_t> s21::GraphAlgorithms::DepthFirstSearch(
 
 std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
     s21::Graph &graph, uint32_t start_vertex) {
+  if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   auto size = graph.GetSize();
-  if (size == 0) throw std::runtime_error("Graph is empty.");
   if (start_vertex > size || start_vertex <= 0) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -73,13 +73,13 @@ std::vector<uint32_t> s21::GraphAlgorithms::BreadthFirstSearch(
 
 std::vector<uint32_t> s21::GraphAlgorithms::GetLeastSpanningTree(
     s21::Graph &graph) {
-  auto size = graph.GetSize();
-  if (size == 0) throw std::runtime_error("Graph is empty.");
+  if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   if (graph.IsDirected()) {
     throw std::runtime_error(
         "It's not possible to find a least spanning tree in a directed graph "
         "with Prim's algorithm.");
   }
+  auto size = graph.GetSize();
   auto matrix = graph.GetGraph();
 
   std::vector<uint32_t> mst(size * size, 0);
@@ -149,8 +149,8 @@ s21::GraphAlgorithms::SolveTravelingSalesmanProblemNearestNeighbor(
 int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
                                                          int vertex1,
                                                          int vertex2) {
+  if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   int size = graph.GetSize();
-  if (graph.GetSize() == 0) throw std::runtime_error("Graph is empty.");
   if (vertex1 > size || vertex2 > size || vertex1 < 1 || vertex2 < 1) {
     throw std::out_of_range("Vertex doesn't exist.");
   }
@@ -196,7 +196,7 @@ int s21::GraphAlgorithms::GetShortestPathBetweenVertices(Graph &graph,
 
 s21::Graph::Matrix s21::GraphAlgorithms::GetShortestPathsBetweenAllVertices(
     Graph &graph) {
-  if (graph.GetSize() == 0) throw std::runtime_error("Graph is empty.");
+  if (graph.IsEmpty()) throw std::runtime_error("Graph is empty.");
   int size = graph.GetSize();
   unsigned int max_dist = INT32_MAX;
   s21::Graph::Matrix dist(size * size, max_dist);

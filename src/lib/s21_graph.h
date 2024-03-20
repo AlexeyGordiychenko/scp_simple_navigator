@@ -25,6 +25,7 @@ class Graph {
   uint32_t GetSize() const;
   bool IsDirected() const;
   bool IsConnected() const;
+  bool IsEmpty() const;
 
  private:
   // Variables

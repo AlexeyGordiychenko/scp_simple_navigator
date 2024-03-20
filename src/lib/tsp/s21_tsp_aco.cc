@@ -12,7 +12,7 @@ s21::TsmResult s21::TSPAntColonyOptimization::Solve() {
   if (!graph_.IsConnected()) {
     throw std::runtime_error("Graph is not connected.");
   }
-  if (graph_.GetSize() == 0) {
+  if (graph_.IsEmpty()) {
     throw std::runtime_error("Graph is empty.");
   }
 

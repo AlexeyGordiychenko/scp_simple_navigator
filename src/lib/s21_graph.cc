@@ -102,3 +102,4 @@ const s21::Graph::Matrix& s21::Graph::GetGraph() const { return graph_; }
 uint32_t s21::Graph::GetSize() const { return size_; }
 bool s21::Graph::IsDirected() const { return directed_; }
 bool s21::Graph::IsConnected() const { return connected_; }
+bool s21::Graph::IsEmpty() const { return size_ == 0; }
