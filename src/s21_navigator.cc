@@ -95,7 +95,7 @@ int main() {
   s21::ConsoleMenu menu(
       "Choose an option:\n", "Invalid input\n", "> ",
       {{"Load graph from a file", [&]() { Load(menu, controller); }},
-       {"Bread first traversal 1",
+       {"Bread first traversal",
         [&]() {
           Traversal(menu,
                     std::bind(&s21::Controller::BreadthFirstSearch, &controller,
