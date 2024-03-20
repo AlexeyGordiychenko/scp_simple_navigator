@@ -110,10 +110,10 @@ class ConsoleMenu {
     auto end = std::chrono::high_resolution_clock::now();
     auto duration =
         std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
-    std::cout << kGreen << kBold << "Execution time for "
-              << func_text_pair.second << ": " << std::fixed
-              << std::setprecision(3) << (duration.count() / 1000.0)
-              << " seconds" << kResetColor << std::endl;
+    out_ << kGreen << kBold << "Execution time for " << func_text_pair.second
+         << ": " << std::fixed << std::setprecision(3)
+         << (duration.count() / 1000.0) << " seconds" << kResetColor
+         << std::endl;
   }
 };
 }  // namespace s21
