@@ -1,0 +1,38 @@
+#ifndef SCP_A2_GRAPH_TESTS_H
+#define SCP_A2_GRAPH_TESTS_H
+
+#include <fstream>
+
+#include "../lib/scp_graph.h"
+#include "scp_navigator_tests.h"
+
+class LoadGraphErrorsTestCase : public ::testing::Test {
+ protected:
+  void CheckThrowAndMessage(const std::string& file,
+                            const std::string& message) {
+    scp::Graph graph;
+    EXPECT_THAT(
+        [&]() { graph.LoadGraphFromFile("tests/files/" + file + ".txt"); },
+        testing::ThrowsMessage<std::runtime_error>(
+            testing::HasSubstr(message)));
+  }
+};
+
+class ExportGraphTestCase : public ::testing::Test {
+ protected:
+  bool CompareDotFiles(const std::string& file1, const std::string& file2) {
+    std::ifstream f1("tests/files/" + file1 + ".dot", std::ios::binary);
+    std::ifstream f2("tests/files/" + file2 + ".dot", std::ios::binary);
+
+    if (!f1.is_open() || !f2.is_open()) return false;
+
+    auto pair = std::mismatch(std::istreambuf_iterator<char>(f1),
+                              std::istreambuf_iterator<char>(),
+                              std::istreambuf_iterator<char>(f2));
+
+    return pair.first == std::istreambuf_iterator<char>() &&
+           pair.second == std::istreambuf_iterator<char>();
+  }
+};
+
+#endif  // SCP_A2_GRAPH_TESTS_H

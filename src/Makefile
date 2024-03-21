@@ -21,22 +21,22 @@ OBJ_DIR_GCOV=$(OBJ_DIR)/$(GCOV_DIR)
 OBJ_DIR_TEST=$(OBJ_DIR)/$(TEST_DIR)
 
 # Files
-SRCS=$(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/s21_*.cc))
+SRCS=$(foreach dir, $(SRC_DIRS), $(wildcard $(dir)/scp_*.cc))
 OBJS=$(patsubst %.cc,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
-SRCS_TEST=$(wildcard $(TEST_DIR)/s21_*.cc)
+SRCS_TEST=$(wildcard $(TEST_DIR)/scp_*.cc)
 OBJS_TEST=$(patsubst $(TEST_DIR)/%.cc,$(OBJ_DIR_TEST)/%.o,$(SRCS_TEST))
 OBJS_GCOV=$(patsubst %.cc, $(OBJ_DIR_GCOV)/%.o, $(notdir $(SRCS_TEST)))
-LIBS_SRCS=$(wildcard $(LIB_DIR)/s21_*.cc)
+LIBS_SRCS=$(wildcard $(LIB_DIR)/scp_*.cc)
 LIBS_OBJS=$(patsubst $(LIB_DIR)/%.cc,$(OBJ_DIR)/%.o,$(LIBS_SRCS))
 LIBS_OBJS_GCOV=$(patsubst $(LIB_DIR)/%.cc,$(OBJ_DIR_GCOV)/%.o,$(LIBS_SRCS))
 LIBS=$(patsubst $(LIB_DIR)/%.cc,%.a,$(LIBS_SRCS))
-LIBS_TSP_SRCS=$(wildcard $(LIB_TSP_DIR)/s21_*.cc)
+LIBS_TSP_SRCS=$(wildcard $(LIB_TSP_DIR)/scp_*.cc)
 LIBS_TSP_OBJS=$(patsubst $(LIB_TSP_DIR)/%.cc,$(OBJ_DIR)/%.o,$(LIBS_TSP_SRCS))
 LIBS_TSP_OBJS_GCOV=$(patsubst $(LIB_TSP_DIR)/%.cc,$(OBJ_DIR_GCOV)/%.o,$(LIBS_TSP_SRCS))
-CLANG_FILES=$(shell find $(SRC_DIR) \( -name "s21_*.cc" -o -name "s21_*.h" \) -print)
+CLANG_FILES=$(shell find $(SRC_DIR) \( -name "scp_*.cc" -o -name "scp_*.h" \) -print)
 
 # Builds
-PROGRAM=s21_navigator
+PROGRAM=scp_navigator
 TEST=test
 TEST_GCOV=$(TEST)_gcov
 TEST_BUILD=$(TEST)_build
@@ -55,10 +55,10 @@ open: $(PROGRAM)
 $(PROGRAM): $(OBJS) $(LIBS)
 	$(CC) $(CFLAGS) $(OFLAGS) $^ -o $(PROGRAM)
 
-s21_graph.a: $(OBJ_DIR)/s21_graph.o 
+scp_graph.a: $(OBJ_DIR)/scp_graph.o 
 	ar rcs $@ $^
 
-s21_graph_algorithms.a: $(LIBS_OBJS) $(LIBS_TSP_OBJS)
+scp_graph_algorithms.a: $(LIBS_OBJS) $(LIBS_TSP_OBJS)
 	ar rcs $@ $^
 
 $(OBJ_DIR)/%.o: %.cc
@@ -90,7 +90,7 @@ $(OBJ_DIR_GCOV)/%.o: %.cc
 # Other rules
 gcov_report: $(TEST_GCOV)
 	mkdir -p $(GCOV_DIR)
-	gcovr --html-details -o $(GCOV_DIR)/index.html --filter $(LIB_DIR)/s21_\.\*.cc --filter $(LIB_TSP_DIR)/s21_\.\*.cc
+	gcovr --html-details -o $(GCOV_DIR)/index.html --filter $(LIB_DIR)/scp_\.\*.cc --filter $(LIB_TSP_DIR)/scp_\.\*.cc
 	open $(GCOV_DIR)/index.html
 
 lcov_report: $(TEST_GCOV)
