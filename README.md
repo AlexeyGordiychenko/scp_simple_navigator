@@ -2,6 +2,37 @@
 
 Learning about graphs and their navigation, including the basic algorithms, such as: search, the shortest path, TSP.
 
+## My part of the project
+
+My part was to make:
+  - [Part 1. Depth- and Breadth-first search](#part-1-depth--and-breadth-first-search)
+  - [Part 3. Finding the minimum spanning tree](#part-3-finding-the-minimum-spanning-tree)
+  - [Part 5. Console interface](#part-5-console-interface)
+  - [Part 6. Bonus. Comparison of methods for solving the traveling salesman problem](#part-6-bonus-comparison-of-methods-for-solving-the-traveling-salesman-problem)
+
+So for my code you can check files:
+
++ [controller/](./src/controller)
++ [view/](./src/view)
++ [scp_navigator.cc](./src/scp_navigator.cc)
++ [lib/scp_graph.h](./src/lib/scp_graph.h)
++ [lib/scp_graph.cc](./src/lib/scp_graph.cc)
++ [lib/tsp/scp_tsp_annealing.h](./src/lib/tsp/scp_tsp_annealing.h)
++ [lib/tsp/scp_tsp_annealing.cc](./src/lib/tsp/scp_tsp_annealing.cc)
++ [lib/tsp/scp_tsp_NN.h](./src/lib/tsp/scp_tsp_NN.h)
++ [lib/tsp/scp_tsp_NN.cc](./src/lib/tsp/scp_tsp_NN.cc)
++ [lib/scp_graph_algorithms.h](./src/lib/scp_graph_algorithms.h)
++ graph algorithms functions ([lib/scp_graph_algorithms.cc](./src/lib/scp_graph_algorithms.cc)):
+  + [DepthFirstSearch](./src/lib/scp_graph_algorithms.cc?plain=1#L11)
+  + [BreadthFirstSearch](./src/lib/scp_graph_algorithms.cc?plain=1#L42)
+  + [GetLeastSpanningTree](./src/lib/scp_graph_algorithms.cc?plain=1#L74)
+  + [SolveTravelingSalesmanProblemAnnealing](./src/lib/scp_graph_algorithms.cc?plain=1#L135)
+  + [SolveTravelingSalesmanProblemNearestNeighbor](./src/lib/scp_graph_algorithms.cc?plain=1#L143)
+
+## Score:
+
+The final score is 120% (max).
+
 ## Task
 
 Within this task, all graphs must meet the following requirements:
